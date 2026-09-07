@@ -1,0 +1,305 @@
+{
+  "version": "1.0.0",
+  "claude_code_min_version": "1.0.0",
+  "generated": "2026-04-30",
+  "note": "Claude Code 組み込みコマンド・スキルの静的 manifest。claude --version が min_version 以上のときのみ有効。バージョンアップ後は scripts/update_builtin_manifest.py で更新する。",
+  "commands": [
+    {
+      "name": "help",
+      "slash": "/help",
+      "kind": "command",
+      "description": "Get help with using Claude Code",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "clear",
+      "slash": "/clear",
+      "kind": "command",
+      "description": "Clear the current conversation",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "config",
+      "slash": "/config",
+      "kind": "command",
+      "description": "Configure Claude Code settings like theme and model",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/settings",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "status",
+      "slash": "/status",
+      "kind": "command",
+      "description": "Show current session status including cost and context usage",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "cost",
+      "slash": "/cost",
+      "kind": "command",
+      "description": "Show cost information for the current session",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "permissions",
+      "slash": "/permissions",
+      "kind": "command",
+      "description": "View and manage tool permissions for the current session",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/settings#permissions",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "agents",
+      "slash": "/agents",
+      "kind": "command",
+      "description": "List and manage available agents",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/sub-agents",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "mcp",
+      "slash": "/mcp",
+      "kind": "command",
+      "description": "Manage MCP (Model Context Protocol) server connections",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/mcp",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "hooks",
+      "slash": "/hooks",
+      "kind": "command",
+      "description": "View and manage lifecycle hooks configuration",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/hooks",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "output-style",
+      "slash": "/output-style",
+      "kind": "command",
+      "description": "Change the output style for Claude responses",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "compact",
+      "slash": "/compact",
+      "kind": "command",
+      "description": "Compact the current conversation to reduce context usage",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "resume",
+      "slash": "/resume",
+      "kind": "command",
+      "description": "Resume a previous conversation session",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "doctor",
+      "slash": "/doctor",
+      "kind": "command",
+      "description": "Diagnose and fix Claude Code installation issues",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "upgrade",
+      "slash": "/upgrade",
+      "kind": "command",
+      "description": "Upgrade Claude Code to the latest version",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "release-notes",
+      "slash": "/release-notes",
+      "kind": "command",
+      "description": "View release notes for the current Claude Code version",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "bug",
+      "slash": "/bug",
+      "kind": "command",
+      "description": "File a bug report for Claude Code",
+      "category": "meta",
+      "doc_url": "https://github.com/anthropics/claude-code/issues",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "migrate-installer",
+      "slash": "/migrate-installer",
+      "kind": "command",
+      "description": "Migrate Claude Code installer to a new installation method",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "login",
+      "slash": "/login",
+      "kind": "command",
+      "description": "Log in to Claude Code with your Anthropic account",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "logout",
+      "slash": "/logout",
+      "kind": "command",
+      "description": "Log out from Claude Code",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "ide",
+      "slash": "/ide",
+      "kind": "command",
+      "description": "Configure IDE integration for Claude Code (VS Code, JetBrains)",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/ide-integrations",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "install-github-app",
+      "slash": "/install-github-app",
+      "kind": "command",
+      "description": "Install the Claude Code GitHub App for pull request integration",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "exit",
+      "slash": "/exit",
+      "kind": "command",
+      "description": "Exit Claude Code",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "quit",
+      "slash": "/quit",
+      "kind": "command",
+      "description": "Quit Claude Code (alias for /exit)",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "fast",
+      "slash": "/fast",
+      "kind": "command",
+      "description": "Toggle fast mode using Claude Opus 4.6 for faster output",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "init",
+      "slash": "/init",
+      "kind": "skill",
+      "description": "Initialize a new CLAUDE.md file with codebase conventions and project documentation",
+      "category": "project-setup",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/memory",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "review",
+      "slash": "/review",
+      "kind": "skill",
+      "description": "Review a pull request and provide detailed code review feedback",
+      "category": "pr-review",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "security-review",
+      "slash": "/security-review",
+      "kind": "skill",
+      "description": "Complete a security review of the pending changes, checking for vulnerabilities",
+      "category": "security",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "loop",
+      "slash": "/loop",
+      "kind": "skill",
+      "description": "Run a prompt or slash command on a recurring interval for polling and scheduled tasks",
+      "category": "automation",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "schedule",
+      "slash": "/schedule",
+      "kind": "skill",
+      "description": "Create, update, list, or run scheduled remote agents that execute on a cron schedule",
+      "category": "automation",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "simplify",
+      "slash": "/simplify",
+      "kind": "skill",
+      "description": "Review changed code for reuse, quality, and efficiency, then fix any issues found",
+      "category": "code-quality",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "fewer-permission-prompts",
+      "slash": "/fewer-permission-prompts",
+      "kind": "skill",
+      "description": "Scan transcripts for common read-only tool calls and add an allowlist to reduce permission prompts",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/settings#permissions",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "update-config",
+      "slash": "/update-config",
+      "kind": "skill",
+      "description": "Configure Claude Code harness via settings.json including hooks, permissions, and environment variables",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code/settings",
+      "min_version": "1.0.0"
+    },
+    {
+      "name": "keybindings-help",
+      "slash": "/keybindings-help",
+      "kind": "skill",
+      "description": "Customize keyboard shortcuts and rebind keys in keybindings.json",
+      "category": "meta",
+      "doc_url": "https://docs.anthropic.com/en/docs/claude-code",
+      "min_version": "1.0.0"
+    }
+  ]
+}

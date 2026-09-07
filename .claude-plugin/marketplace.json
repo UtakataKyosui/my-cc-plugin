@@ -26,6 +26,90 @@
       "source": "./plugins/obsidian-semantic-search",
       "version": "0.1.0",
       "category": "productivity"
+    },
+    {
+      "name": "scaffdog-colocation",
+      "source": "./plugins/scaffdog-colocation",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "wasm-optimizer",
+      "source": "./plugins/wasm-optimizer",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "activitypub-c2s",
+      "source": "./plugins/activitypub-c2s",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "protobuf-tools",
+      "source": "./plugins/protobuf-tools",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "moon-proto",
+      "source": "./plugins/moon-proto",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "poml-assist",
+      "source": "./plugins/poml-assist",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "zenn-review",
+      "source": "./plugins/zenn-review",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "tauri-plugin-dev",
+      "source": "./plugins/tauri-plugin-dev",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "tauri-app-dev",
+      "source": "./plugins/tauri-app-dev",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "obs-plugin-dev",
+      "source": "./plugins/obs-plugin-dev",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "obsidian-knowledge",
+      "source": "./plugins/obsidian-knowledge",
+      "version": "0.1.0",
+      "category": "workflow"
+    },
+    {
+      "name": "mise",
+      "source": "./plugins/mise",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "color-distance",
+      "source": "./plugins/color-distance",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "plugin-overlap-auditor",
+      "source": "./plugins/plugin-overlap-auditor",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

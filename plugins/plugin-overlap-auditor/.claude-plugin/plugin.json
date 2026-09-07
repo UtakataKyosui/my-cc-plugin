@@ -1,0 +1,16 @@
+{
+  "name": "plugin-overlap-auditor",
+  "description": "Skill/SubAgent/Command の役割重複を静的解析 + LLM 分類のハイブリッドで検出し、クラスタごとに GitHub Issue を起票する監査プラグイン。対象: C2Lab plugins/、ユーザーグローバル ~/.claude/、外部マーケットプレイス由来プラグイン、Claude Code 組み込みコマンド。以下の場合に使用: (1) /audit-overlap を実行したとき (2) プラグイン・スキルの肥大化・役割の重複が気になるとき (3) 定期的なメンテナンスとして重複整理したいとき",
+  "version": "0.1.0",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": [
+    "audit",
+    "overlap",
+    "maintenance",
+    "skill",
+    "agent",
+    "deduplication"
+  ]
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# obsidian-semantic-search CLI ラッパ。
+# venv があればその python を、無ければ uv run を使い、検索パッケージを実行する。
+# Skill / Hook はこのラッパだけを呼べばよい（実行系の差異を吸収する）。
+set -euo pipefail
+
+PLUGIN_ROOT="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+SEARCH_DIR="${PLUGIN_ROOT}/search"
+VENV_PY="${PLUGIN_ROOT}/.venv/bin/python"
+
+export PYTHONPATH="${SEARCH_DIR}${PYTHONPATH:+:${PYTHONPATH}}"
+
+if [[ -x "${VENV_PY}" ]]; then
+  exec "${VENV_PY}" -m obsidian_semantic_search "$@"
+elif command -v uv >/dev/null 2>&1; then
+  exec uv run --project "${PLUGIN_ROOT}" python -m obsidian_semantic_search "$@"
+else
+  echo "[oss] venv が見つかりません。先に setup.sh を実行してください: bash \"${PLUGIN_ROOT}/setup.sh\"" >&2
+  exit 1
+fi

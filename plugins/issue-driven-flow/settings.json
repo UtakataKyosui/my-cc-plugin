@@ -1,0 +1,82 @@
+{
+  "tddEnforce": {
+    "enabled": false
+  },
+  "mainFileThreshold": {
+    "maxNonMainFunctions": 1,
+    "maxLines": 20
+  },
+  "additionalExcludePatterns": [],
+  "env": {
+    "RUST_CLI_REWRITE": "1",
+    "RUST_CLI_REWRITE_LIST": "ls,cat,grep,du,ps,diff,hexdump,tree,jq,find,sed"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(jj:*)",
+      "Bash(gh:*)",
+      "Bash(rtk gh:*)",
+      "Bash(rtk git:*)",
+      "Bash(rtk jj:*)",
+      "Bash(lefthook:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(eza:*)",
+      "Bash(lsd:*)",
+      "Bash(fd:*)",
+      "Bash(broot:*)",
+      "Bash(tre:*)",
+      "Bash(zoxide:*)",
+      "Bash(rg:*)",
+      "Bash(bat:*)",
+      "Bash(sd:*)",
+      "Bash(grex:*)",
+      "Bash(hexyl:*)",
+      "Bash(btm:*)",
+      "Bash(procs:*)",
+      "Bash(dust:*)",
+      "Bash(bandwhich:*)",
+      "Bash(delta:*)",
+      "Bash(gitui:*)",
+      "Bash(tokei:*)",
+      "Bash(hyperfine:*)",
+      "Bash(just:*)",
+      "Bash(watchexec:*)",
+      "Bash(xh:*)",
+      "Bash(miniserve:*)",
+      "Bash(starship:*)",
+      "Bash(nu:*)",
+      "Bash(tldr:*)",
+      "Bash(atuin:*)",
+      "Bash(yazi:*)",
+      "Bash(jaq:*)",
+      "Bash(ouch:*)"
+    ],
+    "deny": [
+      "Bash(git:*)"
+    ],
+    "ask": [
+      "Bash(jj abandon:*)",
+      "Bash(jj rebase:*)",
+      "Bash(jj squash:*)",
+      "Bash(jj undo:*)",
+      "Bash(jj restore:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr close:*)",
+      "Bash(gh pr reopen:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh issue edit:*)",
+      "Bash(gh issue close:*)",
+      "Bash(gh issue reopen:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh release create:*)",
+      "Bash(cargo install:*)",
+      "Bash(cargo binstall:*)",
+      "Bash(brew install:*)",
+      "Bash(brew uninstall:*)"
+    ]
+  }
+}

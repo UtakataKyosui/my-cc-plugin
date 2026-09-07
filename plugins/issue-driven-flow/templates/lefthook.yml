@@ -1,0 +1,78 @@
+# NOTE: lint/format/test コマンドは Node/pnpm プロジェクト向けのサンプルです。
+# 非 Node プロジェクトでは該当コマンドをプロジェクトのツールチェーンに合わせて変更してください。
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      # jj にはステージングエリアがないため jj diff --name-only で変更ファイルを取得する
+      files: jj diff --name-only
+      run: |
+        if ! command -v pnpm &>/dev/null; then
+          echo "[lint] pnpm が見つかりません。Node プロジェクト以外では無効化してください。" >&2
+          exit 0
+        fi
+        pnpm exec eslint {files}
+    format:
+      files: jj diff --name-only
+      run: |
+        if ! command -v pnpm &>/dev/null; then
+          echo "[format] pnpm が見つかりません。Node プロジェクト以外では無効化してください。" >&2
+          exit 0
+        fi
+        pnpm exec prettier --check {files}
+
+# Conventional Commits + Issue 番号の自動補完
+# ブランチ名 feat/123-foo → `(#123)` を末尾に追記
+# SKIP=prepare-commit-msg lefthook run ... で一時スキップ可能
+prepare-commit-msg:
+  commands:
+    inject-issue-number:
+      run: |
+        MSG_FILE="{1}"
+        if [[ ! -f "$MSG_FILE" ]]; then exit 0; fi
+        MSG=$(cat "$MSG_FILE")
+        # すでに Issue 番号があればスキップ
+        if echo "$MSG" | grep -qE '\(#[0-9]+\)'; then exit 0; fi
+        # jj ブランチ名から Issue 番号を抽出
+        BRANCH=$(jj log -r @ --no-graph -T 'bookmarks' 2>/dev/null | head -1 || true)
+        if [[ -z "$BRANCH" ]]; then
+          BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+        fi
+        ISSUE=$(echo "$BRANCH" | grep -oE '[0-9]+' | head -1)
+        if [[ -n "$ISSUE" && -n "$(echo "$MSG" | head -1 | tr -d '\n')" ]]; then
+          HEADER=$(head -1 "$MSG_FILE")
+          BODY=$(tail -n +2 "$MSG_FILE")
+          printf '%s\n%s\n' "${HEADER} (#${ISSUE})" "$BODY" > "$MSG_FILE"
+        fi
+
+# コミットメッセージ形式を強制
+# 規約: <type>(<scope>): <subject> (#NNN)
+# SKIP=commit-msg lefthook run ... で一時スキップ可能（初期コミット等）
+commit-msg:
+  commands:
+    validate-conventional:
+      run: |
+        MSG=$(head -1 "{1}")
+        PATTERN='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([^)]+\))?!?: .+ \(#[0-9]+\)$'
+        if ! echo "$MSG" | grep -qE "$PATTERN"; then
+          echo "❌ Conventional Commits 形式に違反しています。"
+          echo ""
+          echo "  正しい形式: <type>(<scope>): <subject> (#NNN)"
+          echo "  例: feat(auth): ログイン機能を追加 (#42)"
+          echo ""
+          echo "  type: feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
+          echo "  (#NNN): Issue 番号必須"
+          echo ""
+          echo "  ⚠️  Issue 番号なしでコミットしたい場合: SKIP=commit-msg lefthook run commit-msg"
+          exit 1
+        fi
+
+pre-push:
+  commands:
+    test:
+      run: |
+        if ! command -v pnpm &>/dev/null; then
+          echo "[test] pnpm が見つかりません。Node プロジェクト以外では無効化してください。" >&2
+          exit 0
+        fi
+        pnpm test

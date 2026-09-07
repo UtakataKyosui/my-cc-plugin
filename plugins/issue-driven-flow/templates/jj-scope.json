@@ -1,0 +1,12 @@
+{
+  "feat: <Changeの説明1>": [
+    "src/example1.ts",
+    "src/example2.ts"
+  ],
+  "feat: <Changeの説明2>": [
+    "src/api/example.ts"
+  ],
+  "test: <テストの説明>": [
+    "tests/example.test.ts"
+  ]
+}

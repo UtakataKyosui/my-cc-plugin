@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "my-cc-plugin",
+  "owner": {
+    "name": "UtakataKyosui"
+  },
+  "metadata": {
+    "description": "Personal Claude Code plugin marketplace.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "change-driven",
+      "source": "./plugins/change-driven",
+      "version": "0.1.1",
+      "category": "workflow"
+    },
+    {
+      "name": "issue-driven-flow",
+      "source": "./plugins/issue-driven-flow",
+      "version": "0.1.0",
+      "category": "workflow"
+    },
+    {
+      "name": "obsidian-semantic-search",
+      "source": "./plugins/obsidian-semantic-search",
+      "version": "0.1.0",
+      "category": "productivity"
+    }
+  ]
+}

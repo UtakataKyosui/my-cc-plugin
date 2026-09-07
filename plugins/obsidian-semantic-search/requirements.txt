@@ -1,0 +1,4 @@
+# obsidian-semantic-search の実行依存。
+# sentence-transformers が CPU 版 torch を引き込む（数百MB）。
+sentence-transformers>=2.7.0
+numpy>=1.24

@@ -1,0 +1,30 @@
+{
+  "name": "issue-driven-flow",
+  "version": "0.1.0",
+  "description": "Issue-Driven 開発の 0 → 1 を 1 プラグインで完結させる統合フロー。jj VCS + Conventional Commits + Issue 番号 + PR レビュー + RTK + branch cleanup を 1 つのコマンド体系に統合。vcs-workflow / pr-workflow / gh-my-task / branch-cleanup / harness-toolkit / gh を全部入りで再配布。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": [
+    "jj",
+    "jujutsu",
+    "issue-driven",
+    "conventional-commits",
+    "pr-workflow",
+    "rtk",
+    "all-in-one",
+    "workflow",
+    "zero-to-one",
+    "vcs",
+    "code-review",
+    "branch-cleanup",
+    "rust-cli",
+    "eza",
+    "fd",
+    "ripgrep",
+    "bat",
+    "delta"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin"
+}

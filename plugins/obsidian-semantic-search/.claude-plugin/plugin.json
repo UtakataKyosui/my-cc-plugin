@@ -1,0 +1,15 @@
+{
+  "name": "obsidian-semantic-search",
+  "version": "0.1.0",
+  "description": "Obsidian Vault をローカルの埋め込みモデルで意味検索（セマンティック検索）するプラグイン。LLM に依存せず、Vault 内容を外部送信しない独立した Python 検索エンジンを Skill / Hook から呼び出す。",
+  "author": { "name": "taiki.amo" },
+  "keywords": [
+    "obsidian",
+    "semantic-search",
+    "embeddings",
+    "knowledge-base",
+    "local",
+    "recall"
+  ],
+  "license": "MIT"
+}

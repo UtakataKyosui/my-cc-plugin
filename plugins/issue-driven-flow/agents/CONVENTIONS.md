@@ -66,7 +66,7 @@ agent を以下の 3 階層に分類する。判定は **宣言された `tools`
 |---|---|---|
 | L1 統括 (coordinator) | 0 | （なし） |
 | L2 worker | 5 | change-planner, code-reviewer, conventional-commit-writer, harness-setup, review-fixer |
-| L2 調査役 (research) | 3 | pr-triage, tdd-compliance-checker, tool-recommender |
+| L2 調査役 (research) | 4 | pr-triage, tdd-compliance-checker, tdd-test-reviewer, tool-recommender |
 
 **注記**: 本プラグインの `agents/` には L1 統括 (coordinator) が存在しない。
 `tools` に `Skill`/`Agent` を含む agent も `skills:` プリロードを持つ agent も 1 つもない。

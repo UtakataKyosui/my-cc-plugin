@@ -1,6 +1,6 @@
 # issue-driven-flow
 
-**これさえあれば Issue から PR マージまで回る**、オールインワン開発フロープラグイン。
+**これさえあれば GitHub Issue から PR マージまで回る**、jj標準のオールインワン開発フロープラグイン。TDDでは、実装前に別エージェントがテスト計画を審査し、PASSになるまで実装を開始しない。
 
 `vcs-workflow` / `pr-workflow` / `gh-my-task` / `branch-cleanup` / `harness-toolkit` / `gh` を統合し、1 つのプラグインで完結させる。
 
@@ -9,7 +9,7 @@
 ## フロー
 
 ```
-/init-project     → /start-feature → (実装) → /commit-change
+/init-project     → /start-feature → テスト設計・審査 → (実装) → /commit-change
                                                     ↓
 /finish-feature ← /respond ← /open-pr ← /ci-check
 ```

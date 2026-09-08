@@ -7,12 +7,12 @@ Issueや仕様書を実装する場合、以下の手順で進めること。
 1. EnterPlanMode で Issue を読み、実装を原子的な `Change` に分解する（1 Change = 1つの変更責任）
 2. ExitPlanMode で計画をユーザーに提示し、承認を得る
 3. 承認後、各 Change を TaskCreate でタスクとして登録する
-4. `.claude/jj-scope.json` を作成し、タスク名をキーに変更してよいファイル一覧を記録する
+4. `change-planner` で共有スコープマニフェストを作成し、タスク名をキーに変更してよいファイル一覧を記録する
 
 ### 実行フェーズ
 
 1. TaskUpdate でタスクを `in_progress` にする（PostToolUse Hook が `jj safe-new -m "<タスク名>"` を自動実行する）
-2. 実装する（`.claude/jj-scope.json` に記載されたファイルのみ変更する）
+2. 実装する（共有スコープマニフェストに記載されたファイルのみ変更する）
 3. 次のタスクを `in_progress` にする → 繰り返す
 
 または手動で:

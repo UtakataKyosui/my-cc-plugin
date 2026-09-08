@@ -22,7 +22,7 @@ description: >
 
 **トリガー**: `start-feature` 完了後
 
-1. `change-planner` エージェントが `.claude/jj-scope.json` を生成済み
+1. `change-planner` エージェントが共有スコープマニフェストを生成済み
 2. `code-exploration` スキルで関連ファイルを探索（fd / rg を活用）
 3. `context-generation` スキルで repomix コンテキストを生成（必要に応じて）
 4. TaskCreate で Change ごとのタスクを登録

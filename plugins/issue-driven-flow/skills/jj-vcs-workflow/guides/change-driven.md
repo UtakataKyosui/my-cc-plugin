@@ -23,7 +23,7 @@ AI エージェント（Claude Code）に実装させると、すべての変更
 
 → 詳細: [../references/installation.md](../references/installation.md)
 
-## jj-scope.json の作成
+## スコープマニフェストの作成
 
 計画フェーズで Claude が生成するスコープマニフェスト:
 
@@ -41,7 +41,7 @@ AI エージェント（Claude Code）に実装させると、すべての変更
 
 - キーは `jj describe -m "..."` の description と完全一致させる
 - `jj safe-new` が description をキーにルックアップしてスコープを特定する
-- `change-planner` エージェントに Issue を渡すと自動生成できる
+- `change-planner` エージェントに Issue を渡すと `jj safe-new` と同じパスへ自動生成できる
 
 → 詳細: [../references/scope-manifest.md](../references/scope-manifest.md)
 
@@ -55,7 +55,7 @@ jj safe-new -m "feat: 認証APIエンドポイントを追加"
 ```
 
 フローは以下:
-1. `.claude/jj-scope.json` をチェック → スコープ外ファイルがあれば exit 1
+1. 共有スコープマニフェストをチェック → スコープ外ファイルがあれば exit 1
 2. `jj fix` で `fix.tools.lefthook`（Lefthook pre-commit）を実行 → 失敗で exit 1
 3. `jj new "$@"` で次の Change を作成
 

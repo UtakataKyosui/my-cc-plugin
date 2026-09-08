@@ -110,6 +110,12 @@
       "source": "./plugins/plugin-overlap-auditor",
       "version": "0.1.0",
       "category": "workflow"
+    },
+    {
+      "name": "claude-extension-tools",
+      "source": "./plugins/claude-extension-tools",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

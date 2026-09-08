@@ -36,7 +36,7 @@ Claude Codeの拡張を作成・更新する。対象を決める前に既存フ
 
 Skillの`description`は、Claudeが選択できる短い起動条件にする。細かい手順や全機能一覧をdescriptionへ列挙しない。ユーザーの明示呼び出しだけに限定する副作用のあるSkillには`disable-model-invocation: true`を設定する。
 
-Subagentは最小権限にする。読み取り専用レビューでは`Write`、`Edit`、`Bash`を`disallowedTools`へ入れ、計画・調査用途では`permissionMode: plan`を使う。作成Skillを利用するレビューSubagentはfrontmatterの`skills`に`claude-extension-authoring`を指定する。
+Subagentは最小権限にする。読み取り専用レビューでは`Write`と`Edit`を`disallowedTools`へ入れ、`Bash`を許可する場合は、検証スクリプトの実行だけに使う理由を明記する。計画・調査用途では`permissionMode: plan`を使う。作成Skillを利用するレビューSubagentはfrontmatterの`skills`に`claude-extension-authoring`を指定する。
 
 Rulesは事実や不変条件を短く書き、対象パスが限定される場合はfrontmatterの`paths`でスコープを限定する。手順や作業のレシピはRulesではなくSkillに置く。
 

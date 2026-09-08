@@ -32,6 +32,8 @@ description: >
    obsidian vault="$OBSIDIAN_VAULT_NAME" daily:append content="<要約テキスト>"
    ```
 
+   Obsidian CLIが使えない場合は `.claude/knowledge-inbox/daily/YYYY-MM-DD.md` に同じ内容を追記する。ローカル受け箱へ保存する場合は `source: local-inbox` を付ける。
+
 3. **汎用性の高い知識を独立したノートとして切り出す**
 
    ライブラリの挙動・デバッグのコツなど再利用できる知識は `knowledge/` へ:
@@ -48,6 +50,8 @@ description: >
    obsidian vault="$OBSIDIAN_VAULT_NAME" daily:append \
      content="- [[<トピック名>]] を作成"
    ```
+
+セッションの要約は [`docs/session-summary-format.md`](../../docs/session-summary-format.md) の形式に合わせる。
 
 ## 書き込みフォーマット例
 

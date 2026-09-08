@@ -1,3 +1,7 @@
+---
+description: jj、GitHub Issue、PR、CIの現在状態をまとめて確認する。
+---
+
 # /issue-driven-flow:status
 
 現在の jj/Issue/PR/CI の状況を 1 コマンドで俯瞰するダッシュボード。

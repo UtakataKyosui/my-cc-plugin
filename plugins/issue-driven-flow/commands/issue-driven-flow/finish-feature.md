@@ -1,3 +1,7 @@
+---
+description: PRマージ後にjj workspaceやブランチを整理し、次のタスクを提案する。
+---
+
 # /issue-driven-flow:finish-feature
 
 PR のマージ後に後始末（ブランチ・workspace 削除 + 次タスク提案）を行う。

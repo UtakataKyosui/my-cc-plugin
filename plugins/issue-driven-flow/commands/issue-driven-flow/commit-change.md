@@ -1,3 +1,7 @@
+---
+description: 現在のjj ChangeからIssue番号付きのConventional Commitsメッセージを起案する。
+---
+
 # /issue-driven-flow:commit-change
 
 現在の jj Change に Conventional Commits 形式 + Issue 番号付きのメッセージを設定する。

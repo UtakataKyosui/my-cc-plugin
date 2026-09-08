@@ -7,7 +7,8 @@
 ## インストール
 
 ```bash
-claude plugin add /path/to/zenn-review
+/plugin marketplace add UtakataKyosui/my-cc-plugin
+/plugin install zenn-review@my-cc-plugin
 ```
 
 ## コマンド一覧
@@ -44,6 +45,8 @@ Write / Edit 時に `articles/*.md`、`books/**/*.md`（チャプター）、お
 
 - Advisory のみ（ブロックしない）
 - stdlib のみ使用（外部依存なし）
+
+MyZenns Issueとの項目対応は `docs/myzenns-article-template.md` に定義する。
 
 ## 設計原則
 

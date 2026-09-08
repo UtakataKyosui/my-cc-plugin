@@ -1,3 +1,7 @@
+---
+description: GitHub Issueを選び、jj workspaceと作業Changeを準備する。
+---
+
 # /issue-driven-flow:start-feature
 
 Issue を選んで実装を開始するワンストップコマンド。

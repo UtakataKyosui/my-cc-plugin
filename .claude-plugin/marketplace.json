@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Personal Claude Code plugin marketplace.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -18,7 +18,7 @@
     {
       "name": "issue-driven-flow",
       "source": "./plugins/issue-driven-flow",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "workflow"
     },
     {
@@ -60,13 +60,13 @@
     {
       "name": "poml-assist",
       "source": "./plugins/poml-assist",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "development"
     },
     {
       "name": "zenn-review",
       "source": "./plugins/zenn-review",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "development"
     },
     {
@@ -90,7 +90,7 @@
     {
       "name": "obsidian-knowledge",
       "source": "./plugins/obsidian-knowledge",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "workflow"
     },
     {

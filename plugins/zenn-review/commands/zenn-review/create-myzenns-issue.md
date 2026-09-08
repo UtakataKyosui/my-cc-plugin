@@ -23,7 +23,7 @@ gh issue create \
 
 5. 作成されたIssue URLを報告し、下書きの保存場所とレビュー結果を併記する。
 
-Issue本文はMyZennsのテンプレートに合わせる。
+Issue本文は [`docs/myzenns-article-template.md`](../../docs/myzenns-article-template.md) の連携項目とMyZennsのテンプレートに合わせる。MyZenns側のテンプレートを変更した場合は、この対応表も更新する。
 
 ```markdown
 ## 概要

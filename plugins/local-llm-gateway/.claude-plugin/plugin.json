@@ -1,0 +1,12 @@
+{
+  "name": "local-llm-gateway",
+  "version": "0.1.0",
+  "description": "Ollama のローカルモデルへ /api/chat で直接問い合わせる gemma コマンドを提供する。claude CLI を経由しないため起動オーバーヘッドが乗らず、think: false で内部思考も切る。通常の claude コマンドには影響しない。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["ollama", "local-llm", "gemma", "litellm"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/local-llm-gateway"]
+}

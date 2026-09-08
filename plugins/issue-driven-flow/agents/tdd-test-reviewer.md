@@ -6,6 +6,11 @@ tools:
   - Read
   - Glob
   - Grep
+disallowedTools:
+  - Write
+  - Edit
+  - Bash
+permissionMode: plan
 maxTurns: 12
 color: yellow
 ---

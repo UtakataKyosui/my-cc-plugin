@@ -5,6 +5,8 @@ description: >
   該当ノートを検索・読み込み・修正・保存する（再固定化）。
   「Obsidianのノートを修正して」「あのメモが間違ってた」「Vaultを更新して」
   「古い情報を直して」といった指示で使用する。
+user-invocable: true
+argument-hint: "<更新対象のノート>"
 ---
 
 # obsidian-update

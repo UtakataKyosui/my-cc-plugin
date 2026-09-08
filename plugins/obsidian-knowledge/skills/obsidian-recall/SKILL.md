@@ -4,6 +4,8 @@ description: >
   タスクのキーワードで Obsidian Vault を検索し、関連するノートの内容をコンテキストに展開する。
   「Obsidian を検索して」「過去の知識を調べて」「Vault に何かある？」
   「このエラー前に見たことある？」といった指示、または作業開始時に使用する。
+user-invocable: true
+argument-hint: "<検索したいトピック>"
 ---
 
 # obsidian-recall

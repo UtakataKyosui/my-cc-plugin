@@ -10,6 +10,7 @@ globs:
   - "articles/**/*.md"
   - "books/**/*.md"
   - "books/**/config.yaml"
+user-invocable: false
 ---
 
 # Zenn Guide — クイックリファレンス

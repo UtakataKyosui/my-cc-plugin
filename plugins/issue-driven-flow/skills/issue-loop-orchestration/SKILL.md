@@ -22,7 +22,7 @@ description: >
 
 **トリガー**: `start-feature` 完了後
 
-1. `change-planner` エージェントが `.claude/jj-scope.json` を生成済み
+1. `change-driven:change-planner` エージェント（別途 `change-driven` が必要）がスコープマニフェストを生成済み
 2. `code-exploration` スキルで関連ファイルを探索（fd / rg を活用）
 3. `context-generation` スキルで repomix コンテキストを生成（必要に応じて）
 4. TaskCreate で Change ごとのタスクを登録
@@ -40,7 +40,7 @@ description: >
 **トリガー**: 全 Change の実装完了後
 
 1. `/issue-driven-flow:commit-change` で各 Change のメッセージを確認・整備
-2. `conventional-commit-writer` エージェントがメッセージを起案
+2. `change-driven:conventional-commit-writer` エージェントがメッセージを起案
 3. Lefthook `commit-msg` が `<type>(<scope>): <subject> (#NNN)` 形式を強制
 
 ## 局面 4: CI チェック

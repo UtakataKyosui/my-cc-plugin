@@ -1,7 +1,7 @@
 {
   "name": "issue-driven-flow",
   "version": "0.2.0",
-  "description": "Issue-Driven 開発の 0 → 1 を 1 プラグインで完結させる統合フロー。jj VCS + Conventional Commits + Issue 番号 + PR レビュー + RTK + branch cleanup を 1 つのコマンド体系に統合。vcs-workflow / pr-workflow / gh-my-task / branch-cleanup / harness-toolkit / gh を全部入りで再配布。",
+  "description": "Issue-Driven 開発の 0 → 1 を支援する統合フロー。jj VCS + Conventional Commits + Issue 番号 + PR レビュー + RTK + branch cleanup を 1 つのコマンド体系に統合。Change計画とコミットメッセージ起案は change-driven プラグインを正本として利用する。",
   "author": {
     "name": "UtakataKyosui"
   },

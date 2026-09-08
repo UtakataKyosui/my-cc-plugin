@@ -45,7 +45,7 @@ description: >
 
 ### scope の決め方
 
-`.claude/jj-scope.json` の現 Change キーが scope の基準：
+`change-driven` の共有スコープマニフェストの現 Change キーが scope の基準：
 
 ```json
 {
@@ -94,13 +94,13 @@ BREAKING CHANGE: /v1/users は廃止されました。/v2/users を使用して�
 SKIP=commit-msg lefthook run commit-msg
 ```
 
-## `conventional-commit-writer` エージェントとの連携
+## `change-driven:conventional-commit-writer` エージェントとの連携
 
-`/issue-driven-flow:commit-change` コマンドを使うと、`conventional-commit-writer` エージェントが：
+`/issue-driven-flow:commit-change` コマンドを使うと、`change-driven:conventional-commit-writer` エージェント（別途 `change-driven` が必要）が：
 
 1. `jj diff` を分析してコミット内容を理解
 2. ブランチ名から Issue 番号を抽出
-3. `.claude/jj-scope.json` で scope を特定
+3. 共有スコープマニフェストで scope を特定
 4. `gh issue view` で Issue の文脈を取得
 5. 上記規約に従ったメッセージを起案
 

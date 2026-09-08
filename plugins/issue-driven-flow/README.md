@@ -71,13 +71,22 @@ jj でこのフローを使う場合は jj-exec-aliases を別途導入する（
 
 `claude.ai/code` のプラグイン設定から `utakata-plugins` マーケットプレイスで `issue-driven-flow` を追加する。
 
+Change計画とコミットメッセージ起案は重複を避けるため `change-driven` を正本とする。`issue-driven-flow` と併用する場合は、次の2つをインストールする:
+
+```text
+/plugin install change-driven@my-cc-plugin
+/plugin install issue-driven-flow@my-cc-plugin
+```
+
+`change-driven:change-planner` と `change-driven:conventional-commit-writer` が、スコープマニフェストの唯一のwriterです。
+
 ### 2. プロジェクトの初期化
 
 既存リポジトリで `/issue-driven-flow:init-project` を実行する。自動で以下が行われる:
 
 - `jj git init --colocate`（jj と git を共存）
 - `lefthook.yml` の展開とインストール
-- `.claude/jj-scope.json` の初期化
+- `change-driven` のスコープマニフェスト初期化手順の案内
 - `.github/ISSUE_TEMPLATE/task.md` の作成
 
 ---

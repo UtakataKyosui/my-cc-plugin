@@ -6,7 +6,7 @@ description: jj、Lefthook、IssueテンプレートなどIssue起点の開発�
 
 新規リポジトリに issue-driven-flow の全環境を一括セットアップする。
 
-`jj`・Lefthook・`.claude/jj-scope.json`・GitHub Issue テンプレート・RTK 確認・Permission を一発で整える。
+`jj`・Lefthook・GitHub Issue テンプレート・RTK 確認・Permission を一発で整える。スコープマニフェストは必須の `change-driven` プラグインが管理する。
 実行後、すぐに `/issue-driven-flow:start-feature` で Issue ループを開始できる状態になる。
 
 ## 実行手順
@@ -63,16 +63,11 @@ if [[ ! -f lefthook.yml ]]; then
 fi
 ```
 
-### Step 6: jj-scope.json の初期化
+### Step 6: スコープマニフェストの準備
 
-`.claude/` ディレクトリと初期 `jj-scope.json` を作成する:
-
-```bash
-mkdir -p .claude
-if [[ ! -f .claude/jj-scope.json ]]; then
-  cp "${CLAUDE_PLUGIN_ROOT}/templates/jj-scope.json" .claude/jj-scope.json
-fi
-```
+`change-driven` プラグインを追加でインストールし、`change-driven:change-planner` に Issue を渡して
+`jj safe-new` と共有するスコープマニフェストを生成する。このプラグインから旧式の
+`.claude/jj-scope.json` は作成しない。
 
 ### Step 7: GitHub Issue テンプレート
 
@@ -99,7 +94,7 @@ rtk --version 2>/dev/null || echo "⚠️ RTK 未インストール。トーク�
 ✅ jj 初期化完了
 ✅ GitHub 認証済み
 ✅ Lefthook インストール済み（lefthook.yml 展開済み）
-✅ .claude/jj-scope.json 作成済み
+✅ スコープマニフェスト: `change-driven:change-planner` で生成
 ✅ GitHub Issue テンプレート展開済み
 ✅ RTK 利用可能
 

@@ -6,7 +6,7 @@ description: jj、Lefthook、IssueテンプレートなどIssue起点の開発�
 
 新規リポジトリに issue-driven-flow の全環境を一括セットアップする。
 
-`jj`・Lefthook・共有スコープマニフェスト・GitHub Issue テンプレート・RTK 確認・Permission を一発で整える。
+`jj`・Lefthook・`.claude/jj-scope.json`・GitHub Issue テンプレート・RTK 確認・Permission を一発で整える。
 実行後、すぐに `/issue-driven-flow:start-feature` で Issue ループを開始できる状態になる。
 
 ## 実行手順
@@ -63,15 +63,14 @@ if [[ ! -f lefthook.yml ]]; then
 fi
 ```
 
-### Step 6: スコープマニフェストの初期化
+### Step 6: jj-scope.json の初期化
 
-`jj safe-new` と SubAgent が共有するリゾルバのパスに初期マニフェストを作成する:
+`.claude/` ディレクトリと初期 `jj-scope.json` を作成する:
 
 ```bash
-SCOPE_FILE="$(bash "${CLAUDE_PLUGIN_ROOT}/scripts/scope-manifest-path.sh")"
-mkdir -p "$(dirname "$SCOPE_FILE")"
-if [[ ! -f "$SCOPE_FILE" ]]; then
-  cp "${CLAUDE_PLUGIN_ROOT}/templates/jj-scope.json" "$SCOPE_FILE"
+mkdir -p .claude
+if [[ ! -f .claude/jj-scope.json ]]; then
+  cp "${CLAUDE_PLUGIN_ROOT}/templates/jj-scope.json" .claude/jj-scope.json
 fi
 ```
 
@@ -100,7 +99,7 @@ rtk --version 2>/dev/null || echo "⚠️ RTK 未インストール。トーク�
 ✅ jj 初期化完了
 ✅ GitHub 認証済み
 ✅ Lefthook インストール済み（lefthook.yml 展開済み）
-✅ スコープマニフェスト作成済み（`jj safe-new` と共有）
+✅ .claude/jj-scope.json 作成済み
 ✅ GitHub Issue テンプレート展開済み
 ✅ RTK 利用可能
 

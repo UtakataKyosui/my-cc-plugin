@@ -45,7 +45,7 @@ description: >
 
 ### scope の決め方
 
-共有スコープマニフェストの現 Change キーが scope の基準：
+`.claude/jj-scope.json` の現 Change キーが scope の基準：
 
 ```json
 {
@@ -100,7 +100,7 @@ SKIP=commit-msg lefthook run commit-msg
 
 1. `jj diff` を分析してコミット内容を理解
 2. ブランチ名から Issue 番号を抽出
-3. 共有スコープマニフェストで scope を特定
+3. `.claude/jj-scope.json` で scope を特定
 4. `gh issue view` で Issue の文脈を取得
 5. 上記規約に従ったメッセージを起案
 

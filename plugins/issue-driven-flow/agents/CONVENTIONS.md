@@ -51,7 +51,7 @@ agent を以下の 3 階層に分類する。判定は **宣言された `tools`
 
 | ファイル名 | 宣言 `name` | `tools` | `skills:` | layer | 分類根拠（実態） |
 |---|---|---|---|---|---|
-| `change-planner.md` | `change-planner` | Read, Write, Glob, Grep, Bash | なし | **L2 worker** | Issue を Change に分解し共有スコープマニフェストを `Write` で生成する。`Agent`/`Skill` を持たず単一責務。成果物（JSON）を生成するため worker。 |
+| `change-planner.md` | `change-planner` | Read, Write, Glob, Grep, Bash | なし | **L2 worker** | Issue を Change に分解し `.claude/jj-scope.json` を `Write` で生成する。`Agent`/`Skill` を持たず単一責務。成果物（JSON）を生成するため worker。 |
 | `code-reviewer.md` | `pr-workflow-code-reviewer` | Read, Edit, Write, Glob, Grep | なし | **L2 worker** | `description` が「修正点があれば実装する」と明示。`Edit`/`Write` でコードを書き換える単一責務。`Agent`/`Skill` なし。 |
 | `conventional-commit-writer.md` | `conventional-commit-writer` | Bash, Read, Glob | なし | **L2 worker** | diff/branch/Issue を読み Conventional Commits メッセージを起案する。`Edit`/`Write` でソースは変更しないが、`Bash`（`jj diff`・`rtk gh issue view` 等）で情報取得し成果物（メッセージ）を生成する。読み取り専用 `Read/Grep/Glob` の範囲を超えるため調査役ではなく worker。 |
 | `harness-setup.md` | `harness-setup` | Read, Glob, Grep, Bash | なし | **L2 worker** | OS/パッケージマネージャ検出・ツール存在確認を `Bash` で行い、インストール手順を案内する。環境セットアップの実務を担う単一責務。`Agent`/`Skill` なし。 |

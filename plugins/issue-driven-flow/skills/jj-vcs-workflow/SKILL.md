@@ -3,6 +3,7 @@ name: jj-vcs-workflow
 description: "Jujutsu (jj) VCS の総合ワークフロー。基本コマンド・Git移行・並列開発・PRレビュー・安全な push ワークフローに加え、jj fix.tools + lefthook + scope manifest による Change 単一責任ワークフローを提供。以下の場合に使用: (1) jj コマンドの使い方を確認したいとき (2) Git から jj への移行時 (3) 並列開発・履歴書き換え・コンフリクト解消を行うとき (4) PR レビュー対応時 (5) push を実行したいとき (6) AI 実装時のコミット粒度（1 Change = 1責任）を維持したいとき"
 globs:
   - "**/.jj/**"
+  - "**/.claude/jj-scope.json"
 ---
 
 # Jujutsu (jj) VCS Workflow
@@ -81,7 +82,7 @@ jj safe-push                               # 全 Change を push
 ### セットアップ・リファレンス
 
 - **[references/installation.md](./references/installation.md)**: jj aliases / lefthook のインストール手順
-- **[references/scope-manifest.md](./references/scope-manifest.md)**: 共有スコープマニフェストの形式と運用
+- **[references/scope-manifest.md](./references/scope-manifest.md)**: .claude/jj-scope.json の形式と運用
 - **[references/bypass-permissions.md](./references/bypass-permissions.md)**: bypassPermissions モード時の挙動
 
 ## 参考リンク

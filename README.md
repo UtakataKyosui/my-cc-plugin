@@ -3,6 +3,7 @@
 個人用 Claude Code プラグインを一元管理・配布する Marketplace です。
 
 Pluginの責務、依存関係、標準フローは[Plugin全体構成](docs/plugin-architecture.md)にまとめています。
+実装時のClaude Code公式ドキュメントとの対応は[実装指針](docs/claude-code-guidelines.md)を参照してください。
 
 ## Plugins
 

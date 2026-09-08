@@ -5,6 +5,7 @@ description: >
   「今日の作業をまとめて」「Obsidianに固定化して」「セッションの学びを記録して」
   「/obsidian-consolidate」といった指示で使用する。
   再利用性が高い知識は独立したトピックノートにも切り出す。
+user-invocable: true
 ---
 
 # obsidian-consolidate

@@ -6,6 +6,13 @@ tools:
   - Read
   - Glob
   - Grep
+disallowedTools:
+  - Write
+  - Edit
+  - Bash
+permissionMode: plan
+skills:
+  - zenn-guide
 maxTurns: 15
 color: green
 ---

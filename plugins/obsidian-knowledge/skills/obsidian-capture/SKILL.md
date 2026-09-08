@@ -6,6 +6,8 @@ description: >
   「Obsidianに記録して」「Vaultに書いておいて」「この知識を保存して」
   といった指示、またはエラー解決・技術調査が完了した直後に使用する。
   エピソード記憶は daily/、意味記憶は knowledge/、ルールは procedures/ へ振り分ける。
+user-invocable: true
+argument-hint: "<記録する知識またはセッションの学び>"
 ---
 
 # obsidian-capture

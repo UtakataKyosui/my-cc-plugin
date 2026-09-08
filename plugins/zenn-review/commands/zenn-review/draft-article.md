@@ -1,5 +1,7 @@
 ---
 description: SessionSummary、Obsidianノート、または指定テーマからZenn記事の下書きを作成し、レビューと修正まで行う。Issueは作成しない。
+argument-hint: "<素材のパスまたは記事テーマ>"
+user-invocable: true
 ---
 
 # /zenn-review:draft-article

@@ -48,6 +48,8 @@ Write / Edit 時に `articles/*.md`、`books/**/*.md`（チャプター）、お
 
 MyZenns Issueとの項目対応は `docs/myzenns-article-template.md` に定義する。
 
+Issue作成の外部副作用は `scripts/create_myzenns_issue.py` に集約し、`--confirmed` がない場合は実行しない。FrontmatterとMarketplaceの整合はリポジトリルートの `scripts/validate_marketplace.py` で確認する。
+
 ## 設計原則
 
 - **自動修正は行わない**: 全てのコマンド・エージェントはレポートと改善案の提示のみ

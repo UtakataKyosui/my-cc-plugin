@@ -1,5 +1,7 @@
 ---
 description: ユーザーが記事案を確認して明示的に了承した後、下書きとレビュー結果からMyZennsに記事Issueを作成する。
+argument-hint: "--title <記事タイトル> --body-file <Issue本文>"
+disable-model-invocation: true
 ---
 
 # /zenn-review:create-myzenns-issue
@@ -11,14 +13,14 @@ description: ユーザーが記事案を確認して明示的に了承した後�
 1. 対象リポジトリを確認する。既定値は `UtakataKyosui/MyZenns`、変更する場合は `MYZENN_REPO` を使う。
 2. 記事案からタイトル、概要、対象読者、アウトライン、参考資料、素材の所在、レビュー結果をIssue本文に整形する。
 3. `zenn` と `article` ラベルが存在することを確認する。存在しない場合はラベル作成を提案して停止する。
-4. 次のコマンドでIssueを作成する。本文は一時ファイルに書き、シェル引数へ直接埋め込まない。
+4. `scripts/create_myzenns_issue.py` を実行してIssueを作成する。スクリプトは `--confirmed` がない場合に処理を拒否し、本文を一時ファイルへ書いてシェル引数へ直接埋め込まない。
 
 ```bash
-gh issue create \
+python3 "${CLAUDE_PLUGIN_ROOT}/scripts/create_myzenns_issue.py" \
   --repo "${MYZENN_REPO:-UtakataKyosui/MyZenns}" \
   --title "[Zenn:記事] <タイトル>" \
-  --label zenn --label article \
-  --body-file <一時ファイル>
+  --body-file <一時ファイル> \
+  --confirmed
 ```
 
 5. 作成されたIssue URLを報告し、下書きの保存場所とレビュー結果を併記する。

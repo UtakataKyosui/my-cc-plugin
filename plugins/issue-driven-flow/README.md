@@ -57,11 +57,12 @@ gh extension install UtakataKyosui/gh-my-task
 
 `jj safe-new`（Change 境界の安全な移動）/ `jj safe-push`（意図しない force-push の防止）は、
 外部ツール [jj-exec-aliases](https://github.com/UtakataKyosui/jj-exec-aliases) が提供する。
-本プラグインは jj safe-* の実体（スクリプト・alias・ブロック hook）を **一切持たない**ため、
-jj でこのフローを使う場合は jj-exec-aliases を別途導入する（同リポジトリの手順に従う）。
+本プラグインは jj safe-* のalias自体は持たず、jj-exec-aliasesを別途導入する。
+safe-* aliasが設定されている場合だけ、同梱hookが素の `jj new` / `jj git push` をブロックして
+safe-*へ誘導する。
 
 未導入でもプラグインは動作する。`scripts/push.py` は jj を素の `jj git push`（確認後 push）に
-フォールバックし、各 SKILL / コマンドの `jj safe-*` 案内は jj-exec-aliases 導入時に有効になる。
+フォールバックし、safe-* alias未導入時は同梱hookも素のjjコマンドをブロックしない。
 
 ---
 
@@ -78,6 +79,7 @@ Change計画とコミットメッセージ起案も本プラグインに統合�
 ```
 
 `issue-driven-flow:change-planner` と `issue-driven-flow:conventional-commit-writer` が、スコープマニフェストの唯一のwriterです。
+旧 `change-driven` からの移行手順は [`docs/migration/change-driven-to-issue-driven-flow.md`](../../docs/migration/change-driven-to-issue-driven-flow.md) を参照してください。
 
 ### 2. プロジェクトの初期化
 

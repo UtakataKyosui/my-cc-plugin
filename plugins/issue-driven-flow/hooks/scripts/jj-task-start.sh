@@ -35,6 +35,13 @@ if ! command -v jj > /dev/null 2>&1; then
     exit 0
 fi
 
+# safe-new is optional; without the alias the normal jj workflow remains in
+# effect and this convenience hook must not emit a failed command.
+if ! jj config get aliases.safe-new > /dev/null 2>&1; then
+    echo "━━━ Change遷移をスキップ: jj safe-new alias が未導入です ━━━"
+    exit 0
+fi
+
 # Skip outside a jj repository.
 if ! jj root > /dev/null 2>&1; then
     echo "━━━ Change遷移をスキップ: jj リポジトリではありません ━━━"

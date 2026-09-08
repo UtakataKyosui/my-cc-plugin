@@ -37,7 +37,7 @@ jj git init --colocate
 
 `jj safe-new` / `jj safe-push` とシェルラッパーは外部ツール
 [jj-exec-aliases](https://github.com/UtakataKyosui/jj-exec-aliases) が提供する。
-利用する場合は同リポジトリの手順に従って導入する（このプラグインは jj safe-* の実体を持たない）。
+利用する場合は同リポジトリの手順に従って導入する（alias未導入時は同梱hookが素のjjコマンドを許可する）。
 
 ### Step 4: GitHub 認証確認
 

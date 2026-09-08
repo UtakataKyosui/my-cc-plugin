@@ -31,6 +31,16 @@ COMMAND=$(printf '%s\n' "$INPUT" | jq -r '.tool_input.command // empty' 2>/dev/n
 
 [ -z "$COMMAND" ] && exit 0
 
+# The safe-* aliases are an optional dependency. Only enforce the corresponding
+# guard when that alias is actually configured; otherwise issue-driven-flow's
+# documented plain-jj fallback remains usable.
+SAFE_NEW_AVAILABLE=0
+SAFE_PUSH_AVAILABLE=0
+if command -v jj > /dev/null 2>&1; then
+    jj config get aliases.safe-new > /dev/null 2>&1 && SAFE_NEW_AVAILABLE=1
+    jj config get aliases.safe-push > /dev/null 2>&1 && SAFE_PUSH_AVAILABLE=1
+fi
+
 # Trailing boundary after the subcommand: end-of-line, or any char that can't be
 # part of an identifier. This blocks `jj new;` / `jj new&&…` / `$(jj new)` while
 # NOT matching unrelated words like `jj newfoo` or `jj git pushme`.
@@ -43,7 +53,7 @@ FILTERED_NEW=$(printf '%s\n' "$COMMAND" | \
     sed -E 's/jj[[:space:]]+safe-new/JJ_SAFE_NEW/g' | \
     sed -E 's/command[[:space:]]+jj[[:space:]]+new/COMMAND_JJ_NEW/g')
 
-if printf '%s\n' "$FILTERED_NEW" | grep -qE "(^|[|&;({[:space:]])jj[[:space:]]+new$BOUNDARY"; then
+if [ "$SAFE_NEW_AVAILABLE" -eq 1 ] && printf '%s\n' "$FILTERED_NEW" | grep -qE "(^|[|&;({[:space:]])jj[[:space:]]+new$BOUNDARY"; then
     echo "jj new の直接実行は禁止されています。jj safe-new を使ってください（スコープチェックと品質確認が実行されます）。" >&2
     echo "例: jj safe-new -m \"feat: 次のChange名\"" >&2
     exit 2
@@ -56,7 +66,7 @@ fi
 FILTERED_PUSH=$(printf '%s\n' "$COMMAND" | \
     sed -E 's/command[[:space:]]+jj[[:space:]]+git[[:space:]]+push/COMMAND_JJ_GIT_PUSH/g')
 
-if printf '%s\n' "$FILTERED_PUSH" | grep -qE "(^|[|&;({[:space:]])jj[[:space:]]+git[[:space:]]+push$BOUNDARY"; then
+if [ "$SAFE_PUSH_AVAILABLE" -eq 1 ] && printf '%s\n' "$FILTERED_PUSH" | grep -qE "(^|[|&;({[:space:]])jj[[:space:]]+git[[:space:]]+push$BOUNDARY"; then
     echo "jj git push の直接実行は禁止されています。jj safe-push を使ってください（diverge/conflict チェックと品質確認が実行されます）。" >&2
     exit 2
 fi

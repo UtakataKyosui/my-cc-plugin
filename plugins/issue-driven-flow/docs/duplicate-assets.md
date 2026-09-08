@@ -9,8 +9,8 @@
 >
 > 本ドキュメントの **`jj-safe-new` / `jj-safe-push` に関する結論（Option C ＝ プラグイン側 Skill コピーを正本とする）は Issue #19 で覆された**。
 > 両 Skill の**入口（`SKILL.md`）は廃止**し、参照は `jj safe-push` / `jj safe-new` の**エイリアスコマンド**へ一本化した。
-> さらに **jj-safe 安全網一式を外部ツール [jj-exec-aliases](https://github.com/UtakataKyosui/jj-exec-aliases) に完全集約**し、プラグインからは撤去した。撤去対象は jj 専用 hook 4 つ（`jj-block-direct.sh` / `jj-error-advisor.sh` / `jj-task-start.sh` / `jj-workspace-detect.sh`）、実行系スクリプト（`jj-safe-new.sh` / `jj-safe-push.sh` / `install-jj-aliases.sh` / `install-safe-push-shell.sh` / `safe-push-shell.sh` / `install-jj-permissions.sh`）、および `settings.json` の `jj safe-*` permission。jj は個人ツールであり、配布プラグインに jj 固有の安全網を同梱しない方針による。
-> 現在このプラグインは **jj safe-* の実体を一切持たない**。`jj safe-push` / `jj safe-new`・シェルラッパー・ブロック hook・permissions はすべて jj-exec-aliases が提供する（各自 opt-in で導入）。`scripts/push.py` も jj を素の `jj git push`（確認後 push）に変更し、safe-push 依存を外した。
+> （履歴）Issue #21 では **jj-safe 安全網一式を外部ツール [jj-exec-aliases](https://github.com/UtakataKyosui/jj-exec-aliases) に集約**し、当時のプラグインから撤去した。撤去対象は jj 専用 hook 4 つ、実行系スクリプト、`settings.json` の `jj safe-*` permission だった。この判断はalias実体の所在に関するものであり、今回の統合でalias有無を検出する薄い誘導hookのみ再導入している。
+> 現在このプラグインは **jj safe-* のalias実体を持たない**。aliasとシェルラッパーは jj-exec-aliases が提供する（各自 opt-in で導入）。今回の統合で、aliasが存在する場合だけ動作するブロックhookを issue-driven-flow に再統合した。`scripts/push.py` はalias未導入時に素の `jj git push`（確認後 push）へフォールバックする。
 > 理由: `disable-model-invocation` の Skill 入口や jj 固有 hook は、配布プラグインに個人ツール依存を持ち込み、無駄なツール往復や保守の重複を生んでいた。安全網は jj-exec-aliases に一本化するのが正しい所在である。
 > なお運用方針として **`my-task`（gh-my-task）を終了し `gh wheel` へ移行する**（Option C の my-task 判断は本更新で無効化）。ただし **リポジトリ内の `my-task` Skill 実体（`skills/my-task/`）や `gh my-task` を前提とするコマンド（例: `commands/issue-driven-flow/status.md`）の `gh wheel` 置き換えは本 PR のスコープ外**であり、別途対応する。以下 §2・§5・§7 の jj-safe-* / my-task に関する記述は当時の決定の記録として残す。
 

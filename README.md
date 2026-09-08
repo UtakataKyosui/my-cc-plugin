@@ -9,8 +9,7 @@ Pluginの責務、依存関係、標準フローは[Plugin全体構成](docs/plu
 
 | Plugin | Purpose |
 | --- | --- |
-| `change-driven` | jj の change-driven 開発フロー |
-| `issue-driven-flow` | GitHub Issue 起点、jj標準、テスト審査付きの開発・PR ワークフロー |
+| `issue-driven-flow` | GitHub Issue 起点、jj Change、テスト審査付きの開発・PR ワークフロー |
 | `obsidian-semantic-search` | Obsidian Vault のローカル意味検索 |
 | `scaffdog-colocation` | scaffdog によるコロケーション設計支援 |
 | `wasm-optimizer` | JS/TS 処理の WASM 化候補を検出 |
@@ -39,7 +38,7 @@ Claude Code で Marketplace を追加します。
 次に必要なプラグインをインストールします。
 
 ```bash
-/plugin install change-driven@my-cc-plugin
+/plugin install issue-driven-flow@my-cc-plugin
 ```
 
 ## Repository layout

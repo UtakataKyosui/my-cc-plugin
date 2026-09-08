@@ -34,6 +34,10 @@
           },
           {
             "type": "command",
+            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/jj-block-direct.sh\""
+          },
+          {
+            "type": "command",
             "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/block-general-comment.sh\"",
             "timeout": 5
           },
@@ -54,6 +58,16 @@
       }
     ],
     "PostToolUse": [
+      {
+        "matcher": "TaskUpdate",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/jj-task-start.sh\"",
+            "timeout": 60
+          }
+        ]
+      },
       {
         "matcher": "Write",
         "hooks": [
@@ -96,6 +110,10 @@
           {
             "type": "command",
             "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/tdd-failure-guide.py\""
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/jj-error-advisor.sh\""
           }
         ]
       }
@@ -106,6 +124,11 @@
           {
             "type": "command",
             "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/cwd-recheck-tools.sh\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/jj-workspace-detect.sh\"",
             "timeout": 10
           }
         ]

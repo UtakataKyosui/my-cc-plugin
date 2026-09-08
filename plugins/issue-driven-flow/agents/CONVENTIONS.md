@@ -51,9 +51,7 @@ agent を以下の 3 階層に分類する。判定は **宣言された `tools`
 
 | ファイル名 | 宣言 `name` | `tools` | `skills:` | layer | 分類根拠（実態） |
 |---|---|---|---|---|---|
-| `change-planner.md` | `change-planner` | Read, Write, Glob, Grep, Bash | なし | **L2 worker** | Issue を Change に分解し `.claude/jj-scope.json` を `Write` で生成する。`Agent`/`Skill` を持たず単一責務。成果物（JSON）を生成するため worker。 |
 | `code-reviewer.md` | `pr-workflow-code-reviewer` | Read, Edit, Write, Glob, Grep | なし | **L2 worker** | `description` が「修正点があれば実装する」と明示。`Edit`/`Write` でコードを書き換える単一責務。`Agent`/`Skill` なし。 |
-| `conventional-commit-writer.md` | `conventional-commit-writer` | Bash, Read, Glob | なし | **L2 worker** | diff/branch/Issue を読み Conventional Commits メッセージを起案する。`Edit`/`Write` でソースは変更しないが、`Bash`（`jj diff`・`rtk gh issue view` 等）で情報取得し成果物（メッセージ）を生成する。読み取り専用 `Read/Grep/Glob` の範囲を超えるため調査役ではなく worker。 |
 | `harness-setup.md` | `harness-setup` | Read, Glob, Grep, Bash | なし | **L2 worker** | OS/パッケージマネージャ検出・ツール存在確認を `Bash` で行い、インストール手順を案内する。環境セットアップの実務を担う単一責務。`Agent`/`Skill` なし。 |
 | `pr-triage.md` | `pr-triage` | Read, Grep, Glob | なし | **L2 調査役 (research)** | `tools` が `Read`/`Grep`/`Glob` のみ。`description` が「コード修正は行わず、分類のみを責務とする」と明示。未返信スレッドを 3 分類し JSON を出力するだけで、ソースを変更しない。 |
 | `review-fixer.md` | `review-fixer` | Read, Edit, Write, Glob, Grep | なし | **L2 worker** | レビューコメントに基づき `Edit`/`Write` でコードを修正する単一責務。`Agent`/`Skill` なし。 |
@@ -65,7 +63,7 @@ agent を以下の 3 階層に分類する。判定は **宣言された `tools`
 | layer | 件数 | 該当 agent |
 |---|---|---|
 | L1 統括 (coordinator) | 0 | （なし） |
-| L2 worker | 5 | change-planner, code-reviewer, conventional-commit-writer, harness-setup, review-fixer |
+| L2 worker | 3 | code-reviewer, harness-setup, review-fixer |
 | L2 調査役 (research) | 4 | pr-triage, tdd-compliance-checker, tdd-test-reviewer, tool-recommender |
 
 **注記**: 本プラグインの `agents/` には L1 統括 (coordinator) が存在しない。
@@ -73,7 +71,7 @@ agent を以下の 3 階層に分類する。判定は **宣言された `tools`
 PR レビューの全体オーケストレーションは（プラグイン外の）コマンド層・スキル層が担っており、
 `pr-triage`（分類）と `review-fixer`（修正）は親コマンドから委譲される L2 部品として設計されている。
 
-## ファイル名 ↔ 宣言 name の不整合と「8 vs 9」の照合
+## ファイル名 ↔ 宣言 name の不整合と実体の照合
 
 ### ファイル名と宣言 `name` が異なる agent（2 件）
 
@@ -85,16 +83,13 @@ Issue は `pr-workflow-code-reviewer` / `rust-cli-tool-recommender` という名
 | `code-reviewer.md` | `pr-workflow-code-reviewer` |
 | `tool-recommender.md` | `rust-cli-tool-recommender` |
 
-残り 6 個（change-planner, conventional-commit-writer, harness-setup, pr-triage, review-fixer,
-tdd-compliance-checker）はファイル名と宣言 `name` が一致している。
+残り 5 個（harness-setup, pr-triage, review-fixer, tdd-compliance-checker,
+tdd-test-reviewer）はファイル名と宣言 `name` が一致している。
 
-### 「9 agents」と実ファイル「8 個」の照合
+### 実ファイルの照合
 
-- ディスク上の `agents/*.md` ファイルは **正確に 8 個** である。
-- Issue が「9 agents」と記載しているのは、上記 2 件のように **ファイル名と宣言 name が異なる agent を
-  別々にカウントしたか、いずれかの agent を重複して数えた** ことに起因する見込みである。
-- **実態としての agent 数は 8（= ファイル数 = 宣言 name 数）** であり、本ドキュメントの分類テーブルは
-  この 8 個を 1 行ずつ網羅している。9 個目に相当する実ファイルは存在しない。
+- `change-planner` と `conventional-commit-writer` は本プラグインへ統合した。
+- `issue-driven-flow` の `agents/` には、ここに記載するローカルAgentだけを置く。
 
 ## 命名・責務規約
 
@@ -107,7 +102,7 @@ tdd-compliance-checker）はファイル名と宣言 `name` が一致してい�
 - **L1 統括 (coordinator)**: `<domain>-coordinator` サフィックスを付ける
   （例: `pr-review-coordinator`、`team-coordinator`）。
 - **L2 worker**: 「動詞 + 対象」または「対象 + 役割名詞」で責務が一目で分かる名前にする
-  （例: `change-planner`、`review-fixer`、`conventional-commit-writer`）。
+  （例: `review-fixer`、`harness-setup`）。
 - **L2 調査役 (research)**: 「対象 + checker / triage / recommender」など
   「調査・分類・提案」を表す名詞で終える（例: `tdd-compliance-checker`、`pr-triage`）。
 

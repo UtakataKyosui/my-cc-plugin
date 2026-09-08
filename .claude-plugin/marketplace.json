@@ -10,15 +10,9 @@
   },
   "plugins": [
     {
-      "name": "change-driven",
-      "source": "./plugins/change-driven",
-      "version": "0.1.1",
-      "category": "workflow"
-    },
-    {
       "name": "issue-driven-flow",
       "source": "./plugins/issue-driven-flow",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "category": "workflow"
     },
     {

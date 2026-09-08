@@ -6,7 +6,7 @@ description: 現在のjj ChangeからIssue番号付きのConventional Commitsメ
 
 現在の jj Change に Conventional Commits 形式 + Issue 番号付きのメッセージを設定する。
 
-`conventional-commit-writer` エージェントが diff・ブランチ名・Issue 本文を分析し、適切なコミットメッセージを起案する。
+`issue-driven-flow:conventional-commit-writer` エージェントが diff・ブランチ名・Issue 本文を分析し、適切なコミットメッセージを起案する。
 
 ## 実行手順
 
@@ -21,11 +21,11 @@ jj diff --stat
 
 ### Step 2: conventional-commit-writer エージェントの起動
 
-`conventional-commit-writer` エージェントを呼び出す。エージェントが以下を行う:
+`issue-driven-flow:conventional-commit-writer` エージェントを呼び出す。エージェントが以下を行う:
 
 1. `jj diff` で変更内容を分析
 2. ブランチ名から Issue 番号を抽出
-3. `.claude/jj-scope.json` で scope を特定
+3. 共有スコープマニフェストで scope を特定
 4. `gh issue view <NNN>` で Issue の文脈を取得
 5. Conventional Commits メッセージを起案して返す
 
@@ -79,7 +79,7 @@ BREAKING CHANGE: <説明>（任意）
 | フィールド | ルール |
 |---|---|
 | type | feat / fix / docs / style / refactor / perf / test / build / ci / chore / revert |
-| scope | `.claude/jj-scope.json` の Change キーを基準。なければ変更ディレクトリ名 |
+| scope | 共有スコープマニフェストの Change キーを基準。なければ変更ディレクトリ名 |
 | subject | 50 文字以内、命令形、末尾ピリオドなし |
 | (#NNN) | Issue 番号必須。Lefthook が強制する |
 

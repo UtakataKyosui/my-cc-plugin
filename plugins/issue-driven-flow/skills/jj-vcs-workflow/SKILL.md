@@ -46,7 +46,7 @@ AI に実装させるとき、すべての変更が 1 コミットにまとま�
 
 ```bash
 /jj-init          # プロジェクトを初期化
-# `change-driven:change-planner` エージェントで Issue を Change に分解
+# `issue-driven-flow:change-planner` エージェントで Issue を Change に分解
 jj describe -m "feat: User model を追加"   # 現在 Change の責任を宣言
 # ... 実装 ...
 jj safe-new -m "feat: 認証API を追加"      # スコープ・品質チェック → 次の Change
@@ -81,7 +81,7 @@ jj safe-push                               # 全 Change を push
 ### セットアップ・リファレンス
 
 - **[references/installation.md](./references/installation.md)**: jj aliases / lefthook のインストール手順
-- **[references/scope-manifest.md](./references/scope-manifest.md)**: `change-driven` のスコープマニフェスト仕様
+- **[references/scope-manifest.md](./references/scope-manifest.md)**: スコープマニフェスト仕様
 - **[references/bypass-permissions.md](./references/bypass-permissions.md)**: bypassPermissions モード時の挙動
 
 ## 参考リンク

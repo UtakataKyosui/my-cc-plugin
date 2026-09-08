@@ -88,7 +88,7 @@ tdd-test-reviewer）はファイル名と宣言 `name` が一致している。
 
 ### 実ファイルの照合
 
-- `change-planner` と `conventional-commit-writer` は `change-driven` プラグインへ移管した。
+- `change-planner` と `conventional-commit-writer` は本プラグインへ統合した。
 - `issue-driven-flow` の `agents/` には、ここに記載するローカルAgentだけを置く。
 
 ## 命名・責務規約

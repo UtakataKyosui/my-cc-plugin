@@ -150,8 +150,7 @@ Issue #42 の実装を 4 つの Change に分解しました。
 
 ## 注意
 
-- このリポジトリ内 `.claude/agents/` の実体は **このリポジトリで作業しているときのみ** project
-  subagent として有効。任意のリポジトリで使いたい場合は `change-driven` プラグインを
-  インストールする（`scope-manifest-path.sh` が同梱され `$CLAUDE_PLUGIN_ROOT` 経由で解決される）。
-  詳細は repo ルートの README「Claude Code プラグインとしての配布」を参照。
+- `issue-driven-flow` プラグインに同梱されたこのエージェントは、任意のリポジトリで利用できる。
+  `scope-manifest-path.sh` は同じプラグイン内に同梱され `$CLAUDE_PLUGIN_ROOT` 経由で解決される。
+  詳細はプラグイン README を参照。
 - スコープマニフェストの形式・運用の詳細は `docs/scope-manifest.md` を参照。

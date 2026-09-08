@@ -41,7 +41,7 @@ AI エージェント（Claude Code）に実装させると、すべての変更
 
 - キーは `jj describe -m "..."` の description と完全一致させる
 - `jj safe-new` が description をキーにルックアップしてスコープを特定する
-- `change-driven:change-planner` エージェントに Issue を渡すと自動生成できる
+- `issue-driven-flow:change-planner` エージェントに Issue を渡すと自動生成できる
 
 → 詳細: [../references/scope-manifest.md](../references/scope-manifest.md)
 

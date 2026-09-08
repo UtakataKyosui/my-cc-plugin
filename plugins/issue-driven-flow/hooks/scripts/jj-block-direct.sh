@@ -13,7 +13,7 @@
 # shell because a dependency is missing or the input is odd — the worst case is
 # one direct command slipping through, not a broken session.
 #
-# Distributed by jj-exec-aliases via the change-driven plugin. The safe-* aliases
+# Distributed with issue-driven-flow; the safe-* aliases
 # this hook points at are installed separately by `just sync` (see the repo
 # README). Without those aliases the redirect targets won't exist, so install
 # both for a complete standalone safety net.

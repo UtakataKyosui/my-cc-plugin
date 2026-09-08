@@ -45,7 +45,7 @@ description: >
 
 ### scope の決め方
 
-`change-driven` の共有スコープマニフェストの現 Change キーが scope の基準：
+共有スコープマニフェストの現 Change キーが scope の基準：
 
 ```json
 {
@@ -94,9 +94,9 @@ BREAKING CHANGE: /v1/users は廃止されました。/v2/users を使用して�
 SKIP=commit-msg lefthook run commit-msg
 ```
 
-## `change-driven:conventional-commit-writer` エージェントとの連携
+## `issue-driven-flow:conventional-commit-writer` エージェントとの連携
 
-`/issue-driven-flow:commit-change` コマンドを使うと、`change-driven:conventional-commit-writer` エージェント（別途 `change-driven` が必要）が：
+`/issue-driven-flow:commit-change` コマンドを使うと、`issue-driven-flow:conventional-commit-writer` エージェントが：
 
 1. `jj diff` を分析してコミット内容を理解
 2. ブランチ名から Issue 番号を抽出

@@ -1,7 +1,7 @@
 # change-driven プラグイン
 
 jj の **change-driven ワークフロー**（1 Change = 1 責任範囲）を支えるエージェントを、任意のリポジトリで
-使えるよう Claude Code プラグインとして配布する。`jj-exec-aliases` マーケットプレイスのプラグイン。
+使えるよう Claude Code プラグインとして、このMarketplaceから配布する。`jj safe-new` と `jj safe-push` の実体だけは任意導入の `jj-exec-aliases` に依存する。
 
 ## 同梱エージェント
 
@@ -36,9 +36,12 @@ jj の **change-driven ワークフロー**（1 Change = 1 責任範囲）を支
 ## インストール
 
 ```text
-# マーケットプレイスを追加（GitHub から）/ プラグインをインストール（Claude Code TUI コマンド。シェルではない）
-/plugin marketplace add UtakataKyosui/jj-exec-aliases
-/plugin install change-driven@jj-exec-aliases
+# このMarketplaceを追加（Claude Code TUI コマンド）
+/plugin marketplace add UtakataKyosui/my-cc-plugin
+/plugin install change-driven@my-cc-plugin
+
+# safe-* の安全網が必要な場合だけ別途導入する
+# jj-exec-aliases の手順に従う
 ```
 
 インストール後、エージェントは `/agents` に `change-driven:change-planner` /

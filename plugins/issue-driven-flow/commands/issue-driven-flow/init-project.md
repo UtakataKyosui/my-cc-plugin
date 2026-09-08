@@ -1,3 +1,7 @@
+---
+description: jj、Lefthook、IssueテンプレートなどIssue起点の開発環境を初期化する。
+---
+
 # /issue-driven-flow:init-project
 
 新規リポジトリに issue-driven-flow の全環境を一括セットアップする。

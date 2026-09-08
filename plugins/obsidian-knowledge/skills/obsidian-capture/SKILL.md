@@ -12,9 +12,15 @@ description: >
 
 セッション中に得た知見を Obsidian Vault へ書き込む。
 
-## 前提
+## 保存先
 
-環境変数 `OBSIDIAN_VAULT_NAME`（推奨）または `OBSIDIAN_VAULT_PATH` が設定されていること。
+次の順に保存先を決める。
+
+1. `OBSIDIAN_VAULT_PATH` が存在する場合はそのVaultを使う。
+2. `OBSIDIAN_VAULT_NAME` が設定され、Obsidian CLIが利用できる場合はそのVaultを使う。
+3. どちらも使えない場合は、現在のリポジトリの `.claude/knowledge-inbox/` にMarkdownを保存する。
+
+ローカル受け箱へ保存した場合は、ファイルのfrontmatterに `source: local-inbox` を付ける。ObsidianやVaultがないことを理由に、知識の記録自体を省略しない。
 
 ## Vault ディレクトリと記憶タイプの対応
 
@@ -54,6 +60,8 @@ description: >
 
    書き込んだ内容に関連ノートへの `[[リンク]]` を付与する。
    例: `knowledge/react-hooks.md` に書くなら `[[React]]` `[[useState]]` を含める。
+
+ローカル受け箱では、Vaultと同じ `daily/`、`knowledge/`、`procedures/`、`shared/` の下位ディレクトリを作る。
 
 ## 書き込み例
 

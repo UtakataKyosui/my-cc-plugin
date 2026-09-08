@@ -98,11 +98,11 @@ feat(auth): ログイン機能を追加する (#123)
 
 ## 統合済みプラグイン
 
-このプラグインは以下の上流プラグインを **物理コピーで統合** している。
+このプラグインにはPRレビューに必要なスクリプトとSkillを同梱している。配布時の正本はこのリポジトリ内のファイルであり、別Marketplaceから自動同期しない。
 
-| プラグイン | 上流 source パス | 統合した内容 |
+| コンポーネント | 配置 | 内容 |
 |---|---|---|
-| `pr-review-toolkit` | `plugins/pr-review-toolkit` | `scripts/{fetch_pr,parse_diff,analyze_pr,pr_common}.py` + `skills/pr-review-toolkit/` |
+| `pr-review-toolkit` | `scripts/`、`skills/pr-review-toolkit/` | PRの取得、差分分析、レビュー対応 |
 
 ### `pr-review-toolkit` のスクリプト役割
 
@@ -152,11 +152,9 @@ post_reply.py            分類結果を inline threaded reply として投稿
 
 ---
 
-## 上流プラグインとの同期
+## 依存関係と更新方針
 
-物理コピー方式のため、上流プラグインが更新されても自動反映されない。
-
-各上流プラグインの更新を確認し、必要なファイルを手動で同期すること。
+このMarketplaceで配布するPluginの正本は、このリポジトリの各 `plugins/<name>` 配下にある。過去の上流Plugin名や手動同期手順は配布上の依存ではない。外部ツールに依存する場合だけREADMEと [`docs/plugin-architecture.md`](../../docs/plugin-architecture.md) に明記し、更新時は対応するPluginのバージョンを上げる。
 
 ---
 

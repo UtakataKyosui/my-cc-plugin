@@ -1,6 +1,15 @@
 ---
 name: harness-setup
-description: Use this agent when the user wants to install missing harness-toolkit tools, set up the development environment, or when the SessionStart hook reports missing tools. Examples:
+description: 不足しているharness-toolkitツールを検出し、開発環境のセットアップ手順を案内する。
+model: inherit
+tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
+maxTurns: 15
+color: green
+---
 
 <example>
 Context: SessionStart hook detected missing tools and printed a warning message.
@@ -28,16 +37,6 @@ assistant: "harness-setup agent で全ツールの存在・バージョンを確
 ツールの検証作業は harness-setup agent が担当する。
 </commentary>
 </example>
-
-model: inherit
-tools:
-  - Read
-  - Glob
-  - Grep
-  - Bash
-maxTurns: 15
-color: green
----
 
 You are a development environment setup specialist for the harness-toolkit toolset.
 

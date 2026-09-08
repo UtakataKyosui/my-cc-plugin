@@ -7,7 +7,7 @@
           {
             "type": "command",
             "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/pueue-daemon-guard.sh\"",
-            "timeout": 3000,
+            "timeout": 3,
             "statusMessage": "Pueue デーモンチェック中..."
           }
         ]

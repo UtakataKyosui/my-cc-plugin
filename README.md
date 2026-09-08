@@ -26,6 +26,7 @@ Pluginの責務、依存関係、標準フローは[Plugin全体構成](docs/plu
 | `mise` | mise によるツールバージョン管理支援 |
 | `color-distance` | 色差・WCAG コントラストの評価 |
 | `plugin-overlap-auditor` | プラグイン内の役割重複の監査 |
+| `claude-extension-tools` | Claude Code拡張の作成とレビュー |
 
 ## Install
 

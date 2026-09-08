@@ -1,0 +1,10 @@
+{
+  "name": "claude-extension-tools",
+  "version": "0.1.0",
+  "description": "Claude CodeのSkill、Subagent、Rules、Hooks、Pluginを設計・作成し、公式仕様と安全性の観点からレビューする開発支援Plugin。",
+  "author": {"name": "UtakataKyosui"},
+  "keywords": ["claude-code", "skills", "subagents", "rules", "hooks", "plugins", "review"],
+  "license": "MIT",
+  "skills": ["./skills/claude-extension-authoring"],
+  "agents": ["./agents/claude-extension-reviewer.md"]
+}

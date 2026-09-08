@@ -1,0 +1,12 @@
+{
+  "name": "local-kanban",
+  "version": "0.1.0",
+  "description": "外部サービス不要のローカルカンバンボード。作業ディレクトリの .kanban/board.json にタスクを保存し、追加・移動・表示・削除を Python スクリプトで操作する。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["kanban", "task-management", "local", "offline"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/local-kanban"]
+}

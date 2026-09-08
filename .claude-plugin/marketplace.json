@@ -134,6 +134,12 @@
       "source": "./plugins/semantica-trace",
       "version": "0.1.0",
       "category": "productivity"
+    },
+    {
+      "name": "local-kanban",
+      "source": "./plugins/local-kanban",
+      "version": "0.1.0",
+      "category": "productivity"
     }
   ]
 }

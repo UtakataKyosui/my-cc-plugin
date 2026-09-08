@@ -1,0 +1,13 @@
+{
+  "name": "semantica-trace",
+  "version": "0.1.0",
+  "description": "Claude Code の過去セッションの transcript を decision graph へ取り込み、「なぜこのファイルを触ったか」「この決定は何が引き起こしたか」を横断照会する。取り込みは SessionEnd フックが行い、照会は読み取り専用の MCP サーバーが提供する。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["semantica", "decision-graph", "transcript", "session-history", "mcp"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/semantica-trace"],
+  "mcpServers": "./.mcp.json"
+}

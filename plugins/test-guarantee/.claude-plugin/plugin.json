@@ -1,0 +1,13 @@
+{
+  "name": "test-guarantee",
+  "version": "0.1.0",
+  "description": "既存テストが実際に何を保証しているかを監査し、要求を保証済み・名前だけ保証・未保証の3分類に分ける。アサーションだけから保証内容を導き、テスト名を根拠にしない。未保証と判定した箇所には既存テストを通過する反例を添える。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["testing", "audit", "coverage", "tdd", "refactoring"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/test-guarantee-audit"],
+  "agents": ["./agents/test-guarantee-auditor.md"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "pueue-queue",
+  "version": "0.1.0",
+  "description": "Pueue デーモンでバックグラウンドタスクをキュー管理する。長時間コマンドのキューイング・並列制御・ログ監視と、複数 Claude Code セッションのジョブ dispatch の2モードを提供する。デーモン未起動を検知するフックを同梱。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["pueue", "task-queue", "background", "parallel", "dispatch"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/pueue-task"]
+}

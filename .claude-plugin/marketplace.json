@@ -122,6 +122,12 @@
       "source": "./plugins/test-guarantee",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "pueue-queue",
+      "source": "./plugins/pueue-queue",
+      "version": "0.1.0",
+      "category": "productivity"
     }
   ]
 }

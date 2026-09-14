@@ -140,6 +140,12 @@
       "source": "./plugins/local-kanban",
       "version": "0.1.0",
       "category": "productivity"
+    },
+    {
+      "name": "local-llm-gateway",
+      "source": "./plugins/local-llm-gateway",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

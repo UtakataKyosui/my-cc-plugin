@@ -139,12 +139,30 @@ ghr_grep() {
       "$total" "$limit" >&2
     list=$(printf '%s\n' "$list" | head -n "$limit")
   fi
+  local fail_tmp status=0
+  fail_tmp=$(mktemp)
   printf '%s\n' "$list" | while IFS= read -r one; do
     [ -n "$one" ] || continue
-    ghr_file "$repo" "$one" "$ref" 2>/dev/null \
-      | grep -nH --label="$one" -e "$pattern" \
-      | _ghr_strip_ctrl || true
+    local content grep_rc
+    if ! content=$(ghr_file "$repo" "$one" "$ref" 2>/dev/null); then
+      printf 'warning: %s の取得に失敗した\n' "$one" >&2
+      printf '%s\n' "$one" >> "$fail_tmp"
+      continue
+    fi
+    printf '%s' "$content" | grep -nH --label="$one" -e "$pattern" | _ghr_strip_ctrl
+    grep_rc=${PIPESTATUS[0]}
+    # grep の「一致なし」(exit 1) は正常。ghr_file の失敗や grep の実行時エラー(exit >1)だけ報告する。
+    if [ "$grep_rc" -gt 1 ]; then
+      printf 'warning: %s の検索でエラーが発生した(grep exit %s)\n' "$one" "$grep_rc" >&2
+      printf '%s\n' "$one" >> "$fail_tmp"
+    fi
   done
+  if [ -s "$fail_tmp" ]; then
+    printf 'warning: 読み取れなかった、または検索に失敗したファイルがある。詳細は上記の warning を参照\n' >&2
+    status=1
+  fi
+  rm -f "$fail_tmp"
+  return "$status"
 }
 
 # 複数ファイルをまとめて取得する。取得できたものはローカルのパスを stdout に出す。

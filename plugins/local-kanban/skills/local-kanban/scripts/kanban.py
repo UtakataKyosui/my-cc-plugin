@@ -55,7 +55,7 @@ def format_title(issue):
     url = issue.get("url", "")
     if url:
         return hyperlink(url, title)
-    return title
+    return _CONTROL_CHAR_RE.sub("", title)
 
 
 def output(data, as_json=False):

@@ -1,0 +1,13 @@
+{
+  "name": "gh-remote-browse",
+  "version": "0.1.0",
+  "description": "リポジトリをクローンせずにリモートのファイル内容とディレクトリ構成を読む。gh repo read-file と read-dir と git trees API をまとめたシェル関数群と、それを使う読み取り専用の調査サブエージェントを提供する。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["gh", "github", "remote", "research", "read-only"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/gh-remote-browse"],
+  "agents": ["./agents/remote-repo-researcher.md"]
+}

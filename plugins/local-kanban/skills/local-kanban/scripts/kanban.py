@@ -3,9 +3,12 @@
 
 import json
 import os
+import re
 import sys
 import argparse
 from datetime import datetime
+
+_CONTROL_CHAR_RE = re.compile(r"[\x00-\x1f\x7f]")
 
 BOARD_FILE = os.path.join(".kanban", "board.json")
 COLUMNS = ["todo", "in-progress", "done"]
@@ -32,7 +35,15 @@ def get_next_id(board):
 
 
 def hyperlink(url, text):
-    """OSC 8 terminal hyperlink: clickable in iTerm2, Warp, kitty, etc."""
+    """OSC 8 terminal hyperlink: clickable in iTerm2, Warp, kitty, etc.
+
+    url/text に ESC などの制御文字が混じっていると OSC 8 シーケンスを途中で
+    終端させ、端末へ任意の制御シーケンスを注入できてしまう。他リポジトリの
+    ボードを取り込んだ場合など信頼できない入力もあるため、制御文字を含む
+    場合はハイパーリンクを諦めてプレーンテキストを返す。
+    """
+    if _CONTROL_CHAR_RE.search(url) or _CONTROL_CHAR_RE.search(text):
+        return text
     return f"\033]8;;{url}\033\\{text}\033]8;;\033\\"
 
 
@@ -195,7 +206,21 @@ def main():
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     sub = parser.add_subparsers(dest="command")
 
-    sub.add_parser("init", help="Initialize a new board")
+    # --json はルートパーサーだけでなく各サブコマンドにも登録する。argparse は
+    # サブコマンド名の後ろに続くオプションをサブパーサー側でしか解決できないため、
+    # ルート専用のままだと `kanban.py board --json` のような、ドキュメントが
+    # 案内する「どのコマンドの後にも --json を付けられる」呼び出しが
+    # "unrecognized arguments" で失敗する。
+    # サブコマンド側の default は argparse.SUPPRESS にする。store_true のまま
+    # default=False にすると、`kanban.py --json board`(先頭指定)のようにルートで
+    # --json を立てても、サブパーサーの解析時に指定なしのデフォルト False で
+    # namespace が上書きされてしまう。SUPPRESS は「指定されなければ何もセット
+    # しない」ため、ルート側でセットした True がサブパーサー解析後も残る。
+
+    p = sub.add_parser("init", help="Initialize a new board")
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     p = sub.add_parser("add", help="Add a new issue")
     p.add_argument("--title", "-t", required=True)
@@ -203,18 +228,33 @@ def main():
     p.add_argument("--priority", "-p", choices=PRIORITIES, default="medium")
     p.add_argument("--labels", "-l", nargs="*")
     p.add_argument("--url", "-u", default="")
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     p = sub.add_parser("list", help="List issues")
     p.add_argument("--column", "-c", choices=COLUMNS)
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
-    sub.add_parser("board", help="Show full board")
+    p = sub.add_parser("board", help="Show full board")
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     p = sub.add_parser("show", help="Show issue details")
     p.add_argument("id", type=int)
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     p = sub.add_parser("move", help="Move issue to column")
     p.add_argument("id", type=int)
     p.add_argument("column", choices=COLUMNS)
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     p = sub.add_parser("update", help="Update an issue")
     p.add_argument("id", type=int)
@@ -223,9 +263,15 @@ def main():
     p.add_argument("--priority", "-p", choices=PRIORITIES)
     p.add_argument("--labels", "-l", nargs="*")
     p.add_argument("--url", "-u")
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     p = sub.add_parser("delete", help="Delete an issue")
     p.add_argument("id", type=int)
+    p.add_argument(
+        "--json", action="store_true", default=argparse.SUPPRESS, help="Output as JSON"
+    )
 
     args = parser.parse_args()
     if args.command is None:

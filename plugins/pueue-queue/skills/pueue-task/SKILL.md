@@ -102,6 +102,8 @@ pueue clean
 
 複数の Claude Code セッションをジョブキューで管理する。並列 AI コーディングや大規模タスク分散に使用する。
 
+同じ作業ディレクトリを指定せずに複数タスクを並列 dispatch すると、すべてのセッションがカレントのチェックアウトを共有する。複数の Claude プロセスが同時に同じファイルを読み書きし、片方の変更をもう片方が上書きする。並列実行するタスクは必ず `git worktree add` などで別々の作業ディレクトリに分離するか、互いに重複しない読み取り専用のタスクに限定する。
+
 ### Step 1: claude グループを作成
 
 ```bash
@@ -109,19 +111,18 @@ pueue group add claude
 pueue parallel -g claude 3  # 同時3セッションまで
 ```
 
-### Step 2: タスクを分解してセッションを dispatch
+### Step 2: タスクごとに worktree を分離してから dispatch
 
 ```bash
+git worktree add ../task1 -b task/1
+git worktree add ../task2 -b task/2
+git worktree add ../task3 -b task/3
+
 # --print フラグで非インタラクティブ実行、出力をキューで管理
-pueue add -g claude -- claude --print "<タスク指示1>"
-pueue add -g claude -- claude --print "<タスク指示2>"
-pueue add -g claude -- claude --print "<タスク指示3>"
-```
-
-作業ディレクトリを指定する場合:
-
-```bash
-pueue add -g claude --working-directory /path/to/project -- claude --print "<指示>"
+# --working-directory で各タスク専用の worktree を指定し、同一チェックアウトの共有を避ける
+pueue add -g claude --working-directory ../task1 -- claude --print "<タスク指示1>"
+pueue add -g claude --working-directory ../task2 -- claude --print "<タスク指示2>"
+pueue add -g claude --working-directory ../task3 -- claude --print "<タスク指示3>"
 ```
 
 ### Step 3: 依存関係のあるタスクを連鎖させる

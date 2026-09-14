@@ -11,6 +11,8 @@ tools: Skill, Read, Grep, Glob, Bash
 disallowedTools: AskUserQuestion, Agent, Write, Edit, NotebookEdit
 model: opus
 effort: high
+permissionMode: plan
+maxTurns: 30
 skills:
   - test-guarantee:test-guarantee-audit
 memory: user

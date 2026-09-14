@@ -72,7 +72,8 @@ safe-*へ誘導する。
 
 `claude.ai/code` のプラグイン設定から `utakata-plugins` マーケットプレイスで `issue-driven-flow` を追加する。
 
-Change計画とコミットメッセージ起案も本プラグインに統合しています。インストールはこれ1つで完結します:
+Issue 選定・TDD・PR レビュー・CI チェックはこのプラグインだけで完結します。
+jj の Change 計画とコミットメッセージ起案は下記「前提条件」のプラグインが担います。
 
 ```text
 /plugin install issue-driven-flow@my-cc-plugin

@@ -40,10 +40,12 @@ def hyperlink(url, text):
     url/text に ESC などの制御文字が混じっていると OSC 8 シーケンスを途中で
     終端させ、端末へ任意の制御シーケンスを注入できてしまう。他リポジトリの
     ボードを取り込んだ場合など信頼できない入力もあるため、制御文字を含む
-    場合はハイパーリンクを諦めてプレーンテキストを返す。
+    場合はハイパーリンクを諦め、text 側からも制御文字を除いたプレーン
+    テキストを返す。text をそのまま返すと、フォールバック経路自体が
+    インジェクションを素通しにしてしまう。
     """
     if _CONTROL_CHAR_RE.search(url) or _CONTROL_CHAR_RE.search(text):
-        return text
+        return _CONTROL_CHAR_RE.sub("", text)
     return f"\033]8;;{url}\033\\{text}\033]8;;\033\\"
 
 

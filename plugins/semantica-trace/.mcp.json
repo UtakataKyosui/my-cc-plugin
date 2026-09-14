@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "semantica-trace": {
+      "type": "stdio",
+      "command": "${CLAUDE_PLUGIN_ROOT}/run-mcp.sh",
+      "args": [],
+      "env": {}
+    }
+  }
+}

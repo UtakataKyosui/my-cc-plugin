@@ -96,10 +96,6 @@
           {
             "type": "command",
             "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/tdd-failure-guide.py\""
-          },
-          {
-            "type": "command",
-            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/jj-error-advisor.sh\""
           }
         ]
       }
@@ -110,11 +106,6 @@
           {
             "type": "command",
             "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/cwd-recheck-tools.sh\"",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "bash \"$CLAUDE_PLUGIN_ROOT/hooks/scripts/jj-workspace-detect.sh\"",
             "timeout": 10
           }
         ]

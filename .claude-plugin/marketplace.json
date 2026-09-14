@@ -116,6 +116,12 @@
       "source": "./plugins/gh-remote-browse",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "test-guarantee",
+      "source": "./plugins/test-guarantee",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

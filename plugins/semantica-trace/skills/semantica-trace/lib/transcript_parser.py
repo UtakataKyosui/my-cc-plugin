@@ -1,9 +1,10 @@
 """Parse a Claude Code JSONL transcript into decision-graph-ready turns.
 
 Idempotent by design: parsing the same transcript twice yields identical
-``decision_id`` values (``<session_id>:<message_uuid>``), so re-running the
-ingest is safe as long as the graph-side writer is also idempotent (see
-``graph_ingest.py``).
+``decision_id`` values (``<session_id>:<message_uuid>:<tool_use_id or index>``,
+the trailing component distinguishes multiple tool_use blocks in one message),
+so re-running the ingest is safe as long as the graph-side writer is also
+idempotent (see ``graph_ingest.py``).
 
 Key finding (see ../NOTES.md #4): on this machine, ``thinking`` blocks are
 always persisted with empty text (signature-only). ``_find_rationale`` falls
@@ -435,6 +436,12 @@ def collect_spawned_agent_ids(transcript_path: str) -> Dict[str, str]:
         message_uuid = r.get("uuid")
         if not message_uuid:
             continue
+        # parse_transcript() の decision_id は {session}:{message_uuid} では
+        # なく {session}:{message_uuid}:{tool_use_id or index} を使う(1メッセージ
+        # に複数 tool_use がある場合の一意化)。ここで計算する親 decision_id が
+        # ずれると add_causal_relationship がエンドポイント不在で静かに何も
+        # しなくなるため、同じ式で揃える。
+        tool_use_index = 0
         for block in _content_blocks(r):
             if block.get("type") != "tool_use":
                 continue
@@ -444,7 +451,8 @@ def collect_spawned_agent_ids(transcript_path: str) -> Dict[str, str]:
                 tool_result_texts.get(tool_use_id, ""),
             )
             if spawned:
-                result[spawned] = f"{session_id}:{message_uuid}"
+                result[spawned] = f"{session_id}:{message_uuid}:{tool_use_id or tool_use_index}"
+            tool_use_index += 1
 
     # 経路2: system/local_command レコードの forked-skill-launch マーカーから
     for r in records:
@@ -480,8 +488,8 @@ def parse_subagent_transcript(
     「なぜ」が丸ごと欠ける。
 
     ``session_id`` はファイル内の ``sessionId``(親セッションのID)を使う。
-    ``decision_id`` は ``<session_id>:<message_uuid>`` のままで、uuid が一意なので
-    親のターンと衝突しない。
+    ``decision_id`` は ``<session_id>:<message_uuid>:<tool_use_id or index>``
+    のままで、uuid が一意なので親のターンと衝突しない。
 
     ``causal_parent_by_agent`` に ``{agentId: 親の decision_id}`` を渡すと、
     サブエージェントの最初の決定を親の Agent 呼び出しへ ``CAUSED`` で繋ぐ。

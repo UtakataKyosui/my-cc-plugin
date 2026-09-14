@@ -144,7 +144,9 @@ def test_nested_subagent_spawn_is_collected(tmp_path):
     path.write_text(json.dumps(launcher) + "\n" + json.dumps(grandchild_launch) + "\n")
 
     result = collect_spawned_agent_ids(str(path))
-    assert result.get("grandchild456") == "sess-y:a-1"
+    # decision_id は {session}:{message_uuid}:{tool_use_id} 形式(1メッセージに
+    # 複数 tool_use がある場合の一意化のため tool_use_id を含む)。
+    assert result.get("grandchild456") == "sess-y:a-1:tu-1"
 
 
 def test_real_subagent_transcript_has_a_consistent_agent_id(real_subagent_transcript):

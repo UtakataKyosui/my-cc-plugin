@@ -34,6 +34,7 @@ from lib.graph_ingest import (  # noqa: E402
     load_or_create_graph,
     save_graph,
     shard_key_for_timestamp,
+    shard_lock,
     shard_path,
 )
 from lib.transcript_parser import parse_transcript, session_id_and_first_timestamp  # noqa: E402
@@ -74,9 +75,14 @@ def main() -> int:
     # を足すためだけに、シャード1本(月次、~数十MB)を読んで書き戻す。単一の
     # 全期間グラフだった頃は、ここが「全セッション累計サイズに比例する」IO に
     # なっていた(#43)。
-    graph = load_or_create_graph(graph_path)
-    stats = ingest_turns(graph, turns, source_documents=[args.project or args.session_id])
-    save_graph(graph, graph_path)
+    #
+    # 同じ月に終了した複数セッションが並行してこの read-modify-write に入ると、
+    # 後に save した方が先に save した方の decision を消してしまう(lost update)。
+    # shard_lock で load から save までを直列化する。
+    with shard_lock(graph_path):
+        graph = load_or_create_graph(graph_path)
+        stats = ingest_turns(graph, turns, source_documents=[args.project or args.session_id])
+        save_graph(graph, graph_path)
 
     print(
         f"ingested session={args.session_id} turns={len(turns)} "

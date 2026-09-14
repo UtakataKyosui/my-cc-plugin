@@ -573,8 +573,8 @@ def parse_transcript(
         if r.get("type") != "assistant" or _excluded(r):
             continue
         blocks = _content_blocks(r)
-        tool_use = next((b for b in blocks if b.get("type") == "tool_use"), None)
-        if tool_use is None:
+        tool_uses = [b for b in blocks if b.get("type") == "tool_use"]
+        if not tool_uses:
             continue
 
         message_uuid = r.get("uuid")
@@ -582,24 +582,16 @@ def parse_transcript(
         if not message_uuid:
             continue
 
-        tool_name = tool_use.get("name", "unknown")
-        tool_input = tool_use.get("input") or {}
         cwd = r.get("cwd")
 
         reasoning, rationale_source, rationale_distance = ancestor_index.find_rationale(
             parent_uuid, decision_uuids
         )
 
-        outcome_text = tool_results.get(tool_use.get("id", ""), "")
-        outcome = _summarize(outcome_text, MAX_OUTCOME_CHARS) if outcome_text else "(no tool_result captured)"
-        spawned = _spawned_agent_id(
-            tool_result_agent_ids.get(tool_use.get("id", "")), outcome_text
-        )
-
-        decision_id = f"{session_id}:{message_uuid}"
-
         # Walk up parentUuid to find the nearest ancestor that is itself a
-        # decision turn (i.e. already emitted), for the causal edge.
+        # decision turn (i.e. already emitted), for the causal edge. Every
+        # tool_use in this message shares the same causal parent, since they
+        # all hang off the same assistant turn.
         causal_parent = None
         cursor = parent_uuid
         hops = 0
@@ -613,25 +605,45 @@ def parse_transcript(
             cursor = parent_record.get("parentUuid")
             hops += 1
 
-        turn = Turn(
-            decision_id=decision_id,
-            session_id=session_id,
-            message_uuid=message_uuid,
-            parent_uuid=parent_uuid,
-            timestamp=_parse_timestamp(r.get("timestamp")),
-            tool_name=tool_name,
-            tool_input=tool_input,
-            category=f"tool_use:{tool_name}",
-            scenario=_scenario_for_tool(tool_name, tool_input),
-            reasoning=reasoning,
-            rationale_source=rationale_source,
-            rationale_distance=rationale_distance,
-            spawned_agent_id=spawned,
-            outcome=outcome,
-            entities=_extract_entities(tool_name, tool_input, cwd),
-            causal_parent_decision_id=causal_parent,
-        )
-        turns.append(turn)
-        decision_id_by_uuid[message_uuid] = decision_id
+        first_decision_id: str = ""
+        for index, tool_use in enumerate(tool_uses):
+            tool_use_id = tool_use.get("id", "")
+            tool_name = tool_use.get("name", "unknown")
+            tool_input = tool_use.get("input") or {}
+
+            outcome_text = tool_results.get(tool_use_id, "")
+            outcome = _summarize(outcome_text, MAX_OUTCOME_CHARS) if outcome_text else "(no tool_result captured)"
+            spawned = _spawned_agent_id(
+                tool_result_agent_ids.get(tool_use_id), outcome_text
+            )
+
+            # message_uuid だけでは、1メッセージに複数 tool_use がある場合に
+            # decision_id が衝突する。tool_use_id(無ければ配列内の連番)を
+            # 足して一意にする。
+            decision_id = f"{session_id}:{message_uuid}:{tool_use_id or index}"
+            if index == 0:
+                first_decision_id = decision_id
+
+            turn = Turn(
+                decision_id=decision_id,
+                session_id=session_id,
+                message_uuid=message_uuid,
+                parent_uuid=parent_uuid,
+                timestamp=_parse_timestamp(r.get("timestamp")),
+                tool_name=tool_name,
+                tool_input=tool_input,
+                category=f"tool_use:{tool_name}",
+                scenario=_scenario_for_tool(tool_name, tool_input),
+                reasoning=reasoning,
+                rationale_source=rationale_source,
+                rationale_distance=rationale_distance,
+                spawned_agent_id=spawned,
+                outcome=outcome,
+                entities=_extract_entities(tool_name, tool_input, cwd),
+                causal_parent_decision_id=causal_parent,
+            )
+            turns.append(turn)
+
+        decision_id_by_uuid[message_uuid] = first_decision_id
 
     return turns

@@ -45,7 +45,8 @@ fi
 
 # 隔離 venv。semantica[all] は pinecone-client 依存が壊れており、この venv では
 # pinecone へ差し替えてある(NOTES.md §0)。venv が無い環境では黙って何もしない。
-VENV_PY="$HOME/.cache/semantica-trace/.venv/bin/python"
+# run-mcp.sh と同じく SEMANTICA_TRACE_PYTHON で venv の場所を上書きできる。
+VENV_PY="${SEMANTICA_TRACE_PYTHON:-$HOME/.cache/semantica-trace/.venv/bin/python}"
 if [ ! -x "$VENV_PY" ]; then
     exit 0
 fi

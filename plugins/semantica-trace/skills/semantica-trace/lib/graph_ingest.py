@@ -13,11 +13,13 @@ add_causal_relationship call.
 
 from __future__ import annotations
 
+import contextlib
+import fcntl
 import glob
 import os
 import re
 import time
-from typing import Iterable, List, Optional
+from typing import Iterable, Iterator, List, Optional
 
 from semantica.context import ContextGraph, Decision, DecisionRecorder
 
@@ -49,6 +51,33 @@ def shard_key_for_timestamp(timestamp: Optional[str], fallback_path: Optional[st
 
 def shard_path(shard_key: str, graph_dir: str = DEFAULT_GRAPH_DIR) -> str:
     return os.path.join(graph_dir, f"{SHARD_PREFIX}{shard_key}{SHARD_SUFFIX}")
+
+
+@contextlib.contextmanager
+def shard_lock(graph_path: str) -> Iterator[None]:
+    """load → ingest → save の間、同じ shard への並行書き込みを直列化する。
+
+    save_graph() 自体は tmp ファイル + os.replace() で原子的だが、それだけでは
+    2つの SessionEnd フックが同じ月に同時に終了したときの lost-update を防げない。
+    両方が同じ shard を読み込み、別々のセッションを足してから、後に save した方が
+    先に save した方の内容ごと上書きしてしまう。読み込みから保存までをロックで
+    囲み、直列に実行させる。
+    """
+    directory = os.path.dirname(graph_path) or "."
+    os.makedirs(directory, exist_ok=True)
+    lock_path = os.path.join(directory, f".{os.path.basename(graph_path)}.lock")
+    # graph 本体(save_graph)・データディレクトリ(ingest_session.sh)ともに本人のみに
+    # 絞っているため、同じディレクトリに作るロックファイルも既定 umask のままにせず
+    # 揃える。
+    if not os.path.exists(lock_path):
+        open(lock_path, "a").close()
+    os.chmod(lock_path, 0o600)
+    with open(lock_path, "a+") as lock_file:
+        fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
 
 
 def list_shard_paths(graph_dir: str = DEFAULT_GRAPH_DIR) -> List[str]:

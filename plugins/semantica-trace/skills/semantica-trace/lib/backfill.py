@@ -26,9 +26,11 @@ transcript は親と同じ ``sessionId`` を持つ(実測: 44154 本の CAUSED �
     python -m lib.backfill --dry-run            # 対象の件数だけ見る
     python -m lib.backfill --graph-path PATH    # シャーディング無効、単一ファイル
 
-制限: 同時に複数の SessionEnd フックが同じ月のシャードへ書き込んだ場合、
+制限: SessionEnd フック同士の並行書き込みは ingest_cli.py が shard_lock で
+直列化するため lost update は起きない。ただし backfill 自身はこのロックを
+取らないため、backfill 実行中に SessionEnd フックが同じ月のシャードへ書き込むと、
 後勝ちで一方の更新が失われ得る(save_graph の原子的 rename は破損を防ぐだけで、
-並行更新の欠落までは防がない)。シャーディングはこれを解決しない。
+並行更新の欠落までは防がない)。
 """
 
 from __future__ import annotations

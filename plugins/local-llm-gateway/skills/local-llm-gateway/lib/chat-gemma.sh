@@ -5,6 +5,13 @@
 set -euo pipefail
 
 OLLAMA_HOST="${OLLAMA_HOST:-http://localhost:11434}"
+# Ollama 自体は OLLAMA_HOST を host:port 形式(スキームなし)で受け取る慣習だが、
+# ここでは curl の URL としてそのまま使うため、スキームが無ければ http:// を補う。
+# 補わないと "host:port/api/tags" がスキーム無し URL として curl に拒否される。
+case "$OLLAMA_HOST" in
+  http://*|https://*) ;;
+  *) OLLAMA_HOST="http://${OLLAMA_HOST}" ;;
+esac
 MODEL="${GEMMA_MODEL:-gemma4:26b}"
 THINK="${GEMMA_THINK:-false}"
 case "$THINK" in

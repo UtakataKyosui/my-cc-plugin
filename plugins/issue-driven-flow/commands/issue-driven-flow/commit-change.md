@@ -6,7 +6,7 @@ description: 現在のjj ChangeからIssue番号付きのConventional Commitsメ
 
 現在の jj Change に Conventional Commits 形式 + Issue 番号付きのメッセージを設定する。
 
-`issue-driven-flow:conventional-commit-writer` エージェントが diff・ブランチ名・Issue 本文を分析し、適切なコミットメッセージを起案する。
+`change-driven:conventional-commit-writer` エージェントが diff・ブランチ名・Issue 本文を分析し、適切なコミットメッセージを起案する。
 
 ## 実行手順
 
@@ -19,9 +19,9 @@ jj diff --stat
 
 変更が空の場合は「コミットする変更がありません」と伝えて終了する。
 
-### Step 2: conventional-commit-writer エージェントの起動
+### Step 2: change-driven:conventional-commit-writer エージェントの起動
 
-`issue-driven-flow:conventional-commit-writer` エージェントを呼び出す。エージェントが以下を行う:
+`change-driven:conventional-commit-writer` エージェントを呼び出す。エージェントが以下を行う:
 
 1. `jj diff` で変更内容を分析
 2. ブランチ名から Issue 番号を抽出

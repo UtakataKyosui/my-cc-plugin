@@ -6,7 +6,7 @@
 
 | Plugin | 主な責務 | 起動の入口 | 依存・連携 |
 | --- | --- | --- | --- |
-| `issue-driven-flow` | Issue選定、1 Change 1責任の計画、jj安全網、テスト審査、Red-Green-Refactor、PR | `/issue-driven-flow:start-feature`、`change-planner` | `jj-exec-aliases`の`safe-*`は任意導入 |
+| `issue-driven-flow` | Issue選定、テスト審査、Red-Green-Refactor、PR、CI チェック | `/issue-driven-flow:start-feature` | jj安全網と Change 計画は `change-driven@jj-exec-aliases` に依存 |
 | `obsidian-knowledge` | Vaultまたはローカル受け箱への記録・想起 | `obsidian-capture`、`obsidian-consolidate` | Vault不在時は`.claude/knowledge-inbox/` |
 | `zenn-review` | 素材から下書き、レビュー、了承後のMyZenns Issue作成 | `/zenn-review:draft-article` | `UtakataKyosui/MyZenns` |
 | 技術別Plugin | Tauri、Protobufなどの技術支援 | 各PluginのSkill | 開発フローとは独立 |

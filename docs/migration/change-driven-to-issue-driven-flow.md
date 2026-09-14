@@ -1,5 +1,9 @@
 # change-driven から issue-driven-flow への移行
 
+> **この文書は v0.3.0 時点の記録です。** v0.4.0（Issue #82）で jj 安全網と Change 計画は
+> `change-driven@jj-exec-aliases` へ移管され、下表の対応関係は逆向きになりました。
+> 現在の構成は `plugins/issue-driven-flow/README.md` の「前提条件」を参照してください。
+
 `change-driven` は `issue-driven-flow` v0.3.0 に統合されました。今後は統合先だけをインストールします。
 
 ```text

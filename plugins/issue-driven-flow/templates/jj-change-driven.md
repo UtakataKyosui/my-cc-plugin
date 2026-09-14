@@ -7,7 +7,7 @@ Issueや仕様書を実装する場合、以下の手順で進めること。
 1. EnterPlanMode で Issue を読み、実装を原子的な `Change` に分解する（1 Change = 1つの変更責任）
 2. ExitPlanMode で計画をユーザーに提示し、承認を得る
 3. 承認後、各 Change を TaskCreate でタスクとして登録する
-4. `issue-driven-flow:change-planner` でスコープマニフェストを作成し、タスク名をキーに変更してよいファイル一覧を記録する
+4. `change-driven:change-planner` でスコープマニフェストを作成し、タスク名をキーに変更してよいファイル一覧を記録する
 
 ### 実行フェーズ
 

@@ -1,7 +1,7 @@
 {
   "name": "issue-driven-flow",
-  "version": "0.3.0",
-  "description": "Issue-Driven 開発の 0 → 1 を完結させる統合フロー。jj Change計画・スコープマニフェスト・Conventional Commits・Issue 番号・PR レビュー・RTK・branch cleanup を 1 つのコマンド体系に統合。",
+  "version": "0.4.0",
+  "description": "Issue-Driven 開発の 0 → 1 を完結させる統合フロー。Conventional Commits・Issue 番号・PR レビュー・TDD・RTK・branch cleanup を 1 つのコマンド体系に統合。jj の Change 計画とスコープマニフェストは change-driven@jj-exec-aliases に依存する。",
   "author": {
     "name": "UtakataKyosui"
   },

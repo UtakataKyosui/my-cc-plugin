@@ -47,7 +47,7 @@ agent を以下の 3 階層に分類する。判定は **宣言された `tools`
 
 ## 分類テーブル
 
-`agents/` には実ファイル **8 個** が存在する。各 agent を上記の判定基準で分類した結果を示す。
+`agents/` には実ファイル **7 個** が存在する。各 agent を上記の判定基準で分類した結果を示す。
 
 | ファイル名 | 宣言 `name` | `tools` | `skills:` | layer | 分類根拠（実態） |
 |---|---|---|---|---|---|
@@ -88,7 +88,9 @@ tdd-test-reviewer）はファイル名と宣言 `name` が一致している。
 
 ### 実ファイルの照合
 
-- `change-planner` と `conventional-commit-writer` は本プラグインへ統合した。
+- `change-planner` と `conventional-commit-writer` は jj 安全網とともに
+  `change-driven@jj-exec-aliases` へ移管した。本プラグインからは
+  `change-driven:change-planner` / `change-driven:conventional-commit-writer` として参照する。
 - `issue-driven-flow` の `agents/` には、ここに記載するローカルAgentだけを置く。
 
 ## 命名・責務規約

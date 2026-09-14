@@ -59,6 +59,13 @@ Issue #11 は、これらについて「どちらを正本とするか」を決�
 dotclaude を持たない利用者はプラグインの `jj-safe-new` / `jj-safe-push` / `my-task` を一切実行できなくなる。
 リポジトリの `rules/repo-scope.md`（グローバル設定をリポジトリファイルに書かない）にも正面から反する。
 
+> **Issue #82 での緩和**: jj 安全網（`jj-block-direct` / `jj-task-start` / スコープマニフェスト /
+> `change-planner` / `conventional-commit-writer`）については、この制約を意図的に緩めた。
+> これらの正本は配布プラグイン `change-driven@jj-exec-aliases` にあり、`issue-driven-flow` は
+> `change-driven:` 名前空間を参照する。参照先はユーザーローカルの `~/.claude` ではなく
+> 配布プラグインなので、他のチームメンバーも `/plugin install change-driven@jj-exec-aliases`
+> で同じものを入手できる。制約 1 が守ろうとしていた「他人が実行できなくなる」問題は起きない。
+
 ### 制約 2: `jj-safe-new` / `jj-safe-push` は安全クリティカル — DRY より正確性
 
 これらは VCS（jj）の破壊的操作（Change 境界越え・force-push）を防ぐガードである。

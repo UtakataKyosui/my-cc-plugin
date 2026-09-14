@@ -65,7 +65,7 @@ fi
 
 ### Step 6: スコープマニフェストの準備
 
-`issue-driven-flow:change-planner` に Issue を渡して
+`change-driven:change-planner` に Issue を渡して
 `jj safe-new` と共有するスコープマニフェストを生成する。このプラグインから旧式の
 `.claude/jj-scope.json` は作成しない。
 
@@ -94,7 +94,7 @@ rtk --version 2>/dev/null || echo "⚠️ RTK 未インストール。トーク�
 ✅ jj 初期化完了
 ✅ GitHub 認証済み
 ✅ Lefthook インストール済み（lefthook.yml 展開済み）
-✅ スコープマニフェスト: `issue-driven-flow:change-planner` で生成
+✅ スコープマニフェスト: `change-driven:change-planner` で生成
 ✅ GitHub Issue テンプレート展開済み
 ✅ RTK 利用可能
 

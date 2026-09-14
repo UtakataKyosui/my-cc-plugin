@@ -41,9 +41,9 @@ AI エージェント（Claude Code）に実装させると、すべての変更
 
 - キーは `jj describe -m "..."` の description と完全一致させる
 - `jj safe-new` が description をキーにルックアップしてスコープを特定する
-- `issue-driven-flow:change-planner` エージェントに Issue を渡すと自動生成できる
+- `change-driven:change-planner` エージェントに Issue を渡すと自動生成できる
 
-→ 詳細: [../references/scope-manifest.md](../references/scope-manifest.md)
+→ 詳細: [スコープマニフェスト仕様](https://github.com/UtakataKyosui/jj-exec-aliases/blob/main/docs/scope-manifest.md)（`change-driven@jj-exec-aliases`）
 
 ## jj safe-new の使い方
 
@@ -93,8 +93,9 @@ jj safe-push -b feat/my-feature
 - 現在の Change description がタスク名と一致しなければ `jj safe-new -m "<title>"` を実行する
 - 一致する場合はスキップ（二重作成防止）
 
-> かつては `PostToolUse(TaskUpdate)` フック（`jj-task-start.sh`）が自動実行していたが、
-> jj 専用 hook は Issue #19 で削除した。現在は明示的に `jj safe-new` を呼ぶ運用とする。
+> このプラグインは jj 専用 hook を持たない（Issue #82 で `change-driven@jj-exec-aliases` へ移管）。
+> `change-driven` を導入していれば `PostToolUse(TaskUpdate)` フックが Change 境界を自動で作る。
+> 導入していない場合は上記のとおり明示的に `jj safe-new` を呼ぶ。
 
 ## フロー全体図
 

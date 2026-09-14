@@ -72,14 +72,28 @@ safe-*へ誘導する。
 
 `claude.ai/code` のプラグイン設定から `utakata-plugins` マーケットプレイスで `issue-driven-flow` を追加する。
 
-Change計画とコミットメッセージ起案も本プラグインに統合しています。インストールはこれ1つで完結します:
+Issue 選定・TDD・PR レビュー・CI チェックはこのプラグインだけで完結します。
+jj の Change 計画とコミットメッセージ起案は下記「前提条件」のプラグインが担います。
 
 ```text
 /plugin install issue-driven-flow@my-cc-plugin
 ```
 
-`issue-driven-flow:change-planner` と `issue-driven-flow:conventional-commit-writer` が、スコープマニフェストの唯一のwriterです。
-旧 `change-driven` からの移行手順は [`docs/migration/change-driven-to-issue-driven-flow.md`](../../docs/migration/change-driven-to-issue-driven-flow.md) を参照してください。
+#### 前提条件: `change-driven@jj-exec-aliases`
+
+jj の Change 計画（スコープマニフェストの生成）とコミットメッセージ起案は、別プラグイン
+`change-driven@jj-exec-aliases` が提供します。`/issue-driven-flow:init-project` と
+`/issue-driven-flow:commit-change` はこれに依存するため、あわせて導入してください。
+
+```text
+/plugin marketplace add UtakataKyosui/jj-exec-aliases
+/plugin install change-driven@jj-exec-aliases
+```
+
+スコープマニフェストの唯一の writer は `change-driven:change-planner`、reader は
+`jj safe-new` です。仕様は https://github.com/UtakataKyosui/jj-exec-aliases/blob/main/docs/scope-manifest.md にあります。
+
+移行の経緯は [`docs/migration/change-driven-to-issue-driven-flow.md`](../../docs/migration/change-driven-to-issue-driven-flow.md) を参照してください。
 
 ### 2. プロジェクトの初期化
 

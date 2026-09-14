@@ -139,18 +139,30 @@ ghr_grep() {
       "$total" "$limit" >&2
     list=$(printf '%s\n' "$list" | head -n "$limit")
   fi
-  local fail_tmp status=0
+  # rc という名前を使う。zsh は status を予約しており、local 宣言だけで
+  # "read-only variable: status" になってこの関数がまるごと動かなくなる
+  # (ファイル冒頭の移植性の制約を参照)。
+  local fail_tmp rc=0
   fail_tmp=$(mktemp)
   printf '%s\n' "$list" | while IFS= read -r one; do
     [ -n "$one" ] || continue
-    local content grep_rc
+    # zsh は代入なしの local 再宣言で、既存値を持つ変数を勝手に stdout へ
+    # ダンプする(typeset の一覧表示モードに落ちる)。ループ2周目以降で
+    # 毎回それが起きるため、必ず値を伴わせて宣言する。
+    local content="" matches="" grep_rc=0
     if ! content=$(ghr_file "$repo" "$one" "$ref" 2>/dev/null); then
       printf 'warning: %s の取得に失敗した\n' "$one" >&2
       printf '%s\n' "$one" >> "$fail_tmp"
       continue
     fi
-    printf '%s' "$content" | grep -nH --label="$one" -e "$pattern" | _ghr_strip_ctrl
-    grep_rc=${PIPESTATUS[0]}
+    # パイプでつなぐと $? が最後のコマンド(_ghr_strip_ctrl)のものになり grep の
+    # 終了ステータスが読めない(bash の PIPESTATUS は zsh に無い)。一度変数へ
+    # 受けてから grep の $? を直接見る。
+    matches=$(printf '%s' "$content" | grep -nH --label="$one" -e "$pattern")
+    grep_rc=$?
+    if [ -n "$matches" ]; then
+      printf '%s\n' "$matches" | _ghr_strip_ctrl
+    fi
     # grep の「一致なし」(exit 1) は正常。ghr_file の失敗や grep の実行時エラー(exit >1)だけ報告する。
     if [ "$grep_rc" -gt 1 ]; then
       printf 'warning: %s の検索でエラーが発生した(grep exit %s)\n' "$one" "$grep_rc" >&2
@@ -159,10 +171,10 @@ ghr_grep() {
   done
   if [ -s "$fail_tmp" ]; then
     printf 'warning: 読み取れなかった、または検索に失敗したファイルがある。詳細は上記の warning を参照\n' >&2
-    status=1
+    rc=1
   fi
   rm -f "$fail_tmp"
-  return "$status"
+  return "$rc"
 }
 
 # 複数ファイルをまとめて取得する。取得できたものはローカルのパスを stdout に出す。

@@ -27,9 +27,13 @@ assert_rewrite() {
         output=$(bash "$HOOK" <<<"$input" 2>/dev/null)
     fi
     local actual_cmd
-    actual_cmd=$(echo "$output" | jq -r '.tool_input.command // empty' 2>/dev/null)
+    actual_cmd=$(echo "$output" | jq -r '.hookSpecificOutput.updatedInput.command // empty' 2>/dev/null)
+    local shape_ok=0
+    echo "$output" | jq -e '.hookSpecificOutput.hookEventName == "PreToolUse"
+        and .hookSpecificOutput.permissionDecision == "allow"
+        and (has("decision") | not)' &>/dev/null && shape_ok=1
 
-    if [[ "$actual_cmd" == "$expected_cmd" ]]; then
+    if [[ "$actual_cmd" == "$expected_cmd" && "$shape_ok" -eq 1 ]]; then
         echo "  PASS: $desc"
         ((PASS++))
     else
@@ -62,7 +66,7 @@ assert_passthrough() {
         ((PASS++))
     else
         local actual_cmd
-        actual_cmd=$(echo "$output" | jq -r '.tool_input.command // empty' 2>/dev/null)
+        actual_cmd=$(echo "$output" | jq -r '.hookSpecificOutput.updatedInput.command // empty' 2>/dev/null)
         if [[ "$actual_cmd" == "$input_cmd" ]]; then
             echo "  PASS: $desc (passthrough unchanged)"
             ((PASS++))

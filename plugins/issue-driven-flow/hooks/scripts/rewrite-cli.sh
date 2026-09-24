@@ -241,6 +241,13 @@ fi
 # リライトなし → 通過
 [[ -z "$NEW_CMD" ]] && exit 0
 
-# RTK プレフィックスを復元して元 JSON の tool_input.command のみ上書き
+# RTK プレフィックスを復元して tool_input.command のみ差し替える
+# updatedInput は permissionDecision が allow のときだけ適用される
 FINAL_CMD="${RTK_PREFIX}${NEW_CMD}"
-jq --arg cmd "$FINAL_CMD" '.decision = (.decision // "allow") | .tool_input.command = $cmd' <<<"$INPUT"
+jq --arg cmd "$FINAL_CMD" '{
+  hookSpecificOutput: {
+    hookEventName: "PreToolUse",
+    permissionDecision: "allow",
+    updatedInput: (.tool_input | .command = $cmd)
+  }
+}' <<<"$INPUT"

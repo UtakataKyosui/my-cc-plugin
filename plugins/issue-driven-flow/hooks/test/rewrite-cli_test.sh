@@ -258,27 +258,17 @@ if command -v fd &>/dev/null; then
         "find dir1 dir2 -name '*.rs'"
 fi
 
-# ── sed → sd ──────────────────────────────────────────────────────────────────
-if command -v sd &>/dev/null; then
-    echo ""
-    echo "--- sed → sd ---"
-    assert_rewrite "sed 's/foo/bar/g' file" \
-        "sed 's/foo/bar/g' file.txt" \
-        "sd 'foo' 'bar' file.txt"
-    assert_rewrite "sed -i 's/foo/bar/g' file" \
-        "sed -i 's/foo/bar/g' file.txt" \
-        "sd 'foo' 'bar' file.txt"
-    assert_passthrough "sed g なしは通過（行ごと vs ファイル全体で等価でない）" \
-        "sed 's/foo/bar/' file.txt"
-    assert_passthrough "sed ダブルクォートは通過（シェル展開の可能性）" \
-        'sed "s/foo/bar/g" file.txt'
-    assert_passthrough "sed -n アドレス指定は通過" \
-        "sed -n '10,20p' file.txt"
-    assert_passthrough "sed -e は通過" \
-        "sed -e 's/foo/bar/' file.txt"
-    assert_passthrough "sed stdin（ファイルなし）は通過" \
-        "sed 's/foo/bar/g'"
-fi
+# ── sed はリライトしない ──────────────────────────────────────────────────────
+# sd はファイルをインプレース編集するため、sed 's/…/g' file（stdout 出力）とは等価でない
+echo ""
+echo "--- sed はリライトしない ---"
+assert_passthrough "sed 's/foo/bar/g' file は通過" \
+    "sed 's/foo/bar/g' file.txt"
+assert_passthrough "sed -i 's/foo/bar/g' file は通過" \
+    "sed -i 's/foo/bar/g' file.txt"
+assert_passthrough "RUST_CLI_REWRITE_LIST=sed でも通過" \
+    "sed 's/foo/bar/g' file.txt" \
+    "RUST_CLI_REWRITE_LIST=sed"
 
 # ── 既存 Rust ツールはスキップ ───────────────────────────────────────────────
 echo ""

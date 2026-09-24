@@ -46,7 +46,7 @@ if [[ "$BARE_CMD" =~ $_META_RE ]]; then
 fi
 
 # リライト対象リストをパース
-IFS=',' read -ra REWRITE_LIST <<<"${RUST_CLI_REWRITE_LIST:-ls,cat,grep,du,ps,diff,hexdump,tree,jq,find,sed}"
+IFS=',' read -ra REWRITE_LIST <<<"${RUST_CLI_REWRITE_LIST:-ls,cat,grep,du,ps,diff,hexdump,tree,jq,find}"
 
 list_has() {
     local needle="$1"
@@ -232,39 +232,6 @@ if [[ -z "$NEW_CMD" ]] && list_has "find" && command -v fd &>/dev/null; then
                     fi
                     NEW_CMD="${NEW_CMD//  / }"
                     NEW_CMD="${NEW_CMD% }"
-                fi
-            fi
-        fi
-    fi
-fi
-
-# sed → sd（s/PAT/REP/[g] FILE パターンのみ）
-# アドレス指定・複数式（-e）・d/p コマンド・パイプ入力はスコープ外
-if [[ -z "$NEW_CMD" ]] && list_has "sed" && command -v sd &>/dev/null; then
-    if [[ "$BARE_CMD" =~ ^sed[[:space:]] ]]; then
-        SED_REST="${BARE_CMD#sed }"
-
-        # -i（インプレース編集）フラグを除去して続行（-i.bak などサフィックス付きは通過）
-        if [[ "$SED_REST" =~ ^-i[[:space:]]+(.*) ]]; then
-            SED_REST="${BASH_REMATCH[1]}"
-        fi
-
-        # -n/-e/-f など残存フラグは通過
-        if [[ ! "$SED_REST" =~ ^-[a-zA-Z] ]]; then
-            # 's/PAT/REP/g' FILE のみ変換対象（シングルクォートのみ）
-            # ダブルクォートは $VAR などのシェル展開を含みうるため通過
-            # g フラグなしは sed が各行の最初の1件を置換するのに対し
-            # sd -n 1 はファイル全体で最初の1件のみ置換するため等価でない → 通過
-            # PAT・REP に / や引用符・| を含むパターンは通過
-            SED_RX="^'s/([^/'\"|]+)/([^/'\"]*)/g'[[:space:]]+(.*)"
-            if [[ "$SED_REST" =~ $SED_RX ]]; then
-                SD_PAT="${BASH_REMATCH[1]}"
-                SD_REP="${BASH_REMATCH[2]}"
-                SD_FILE="${BASH_REMATCH[3]}"
-
-                # 単一ファイル（スペースなし・パイプなし）のみ対応
-                if [[ -n "$SD_FILE" && "$SD_FILE" != *"|"* && ! "$SD_FILE" =~ [[:space:]] ]]; then
-                    NEW_CMD="sd '$SD_PAT' '$SD_REP' $SD_FILE"
                 fi
             fi
         fi

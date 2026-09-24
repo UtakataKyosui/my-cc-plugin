@@ -114,6 +114,12 @@ if command -v eza &>/dev/null; then
     assert_rewrite "rtk ls（複数スペース）" \
         "rtk  ls -la" \
         "rtk eza -la --git --icons --group-directories-first"
+    assert_passthrough "ls \$(…) コマンド置換は通過" \
+        'ls $(id)'
+    assert_passthrough "ls バッククォートは通過" \
+        'ls `id`'
+    assert_passthrough "改行を含むコマンドは通過" \
+        $'ls\nid'
 fi
 
 # ── cat → bat ────────────────────────────────────────────────────────────────

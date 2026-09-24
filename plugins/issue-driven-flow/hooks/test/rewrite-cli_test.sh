@@ -27,9 +27,13 @@ assert_rewrite() {
         output=$(bash "$HOOK" <<<"$input" 2>/dev/null)
     fi
     local actual_cmd
-    actual_cmd=$(echo "$output" | jq -r '.tool_input.command // empty' 2>/dev/null)
+    actual_cmd=$(echo "$output" | jq -r '.hookSpecificOutput.updatedInput.command // empty' 2>/dev/null)
+    local shape_ok=0
+    echo "$output" | jq -e '.hookSpecificOutput.hookEventName == "PreToolUse"
+        and .hookSpecificOutput.permissionDecision == "allow"
+        and (has("decision") | not)' &>/dev/null && shape_ok=1
 
-    if [[ "$actual_cmd" == "$expected_cmd" ]]; then
+    if [[ "$actual_cmd" == "$expected_cmd" && "$shape_ok" -eq 1 ]]; then
         echo "  PASS: $desc"
         ((PASS++))
     else
@@ -62,7 +66,7 @@ assert_passthrough() {
         ((PASS++))
     else
         local actual_cmd
-        actual_cmd=$(echo "$output" | jq -r '.tool_input.command // empty' 2>/dev/null)
+        actual_cmd=$(echo "$output" | jq -r '.hookSpecificOutput.updatedInput.command // empty' 2>/dev/null)
         if [[ "$actual_cmd" == "$input_cmd" ]]; then
             echo "  PASS: $desc (passthrough unchanged)"
             ((PASS++))
@@ -110,6 +114,12 @@ if command -v eza &>/dev/null; then
     assert_rewrite "rtk ls（複数スペース）" \
         "rtk  ls -la" \
         "rtk eza -la --git --icons --group-directories-first"
+    assert_passthrough "ls \$(…) コマンド置換は通過" \
+        'ls $(id)'
+    assert_passthrough "ls バッククォートは通過" \
+        'ls `id`'
+    assert_passthrough "改行を含むコマンドは通過" \
+        $'ls\nid'
 fi
 
 # ── cat → bat ────────────────────────────────────────────────────────────────
@@ -258,27 +268,17 @@ if command -v fd &>/dev/null; then
         "find dir1 dir2 -name '*.rs'"
 fi
 
-# ── sed → sd ──────────────────────────────────────────────────────────────────
-if command -v sd &>/dev/null; then
-    echo ""
-    echo "--- sed → sd ---"
-    assert_rewrite "sed 's/foo/bar/g' file" \
-        "sed 's/foo/bar/g' file.txt" \
-        "sd 'foo' 'bar' file.txt"
-    assert_rewrite "sed -i 's/foo/bar/g' file" \
-        "sed -i 's/foo/bar/g' file.txt" \
-        "sd 'foo' 'bar' file.txt"
-    assert_passthrough "sed g なしは通過（行ごと vs ファイル全体で等価でない）" \
-        "sed 's/foo/bar/' file.txt"
-    assert_passthrough "sed ダブルクォートは通過（シェル展開の可能性）" \
-        'sed "s/foo/bar/g" file.txt'
-    assert_passthrough "sed -n アドレス指定は通過" \
-        "sed -n '10,20p' file.txt"
-    assert_passthrough "sed -e は通過" \
-        "sed -e 's/foo/bar/' file.txt"
-    assert_passthrough "sed stdin（ファイルなし）は通過" \
-        "sed 's/foo/bar/g'"
-fi
+# ── sed はリライトしない ──────────────────────────────────────────────────────
+# sd はファイルをインプレース編集するため、sed 's/…/g' file（stdout 出力）とは等価でない
+echo ""
+echo "--- sed はリライトしない ---"
+assert_passthrough "sed 's/foo/bar/g' file は通過" \
+    "sed 's/foo/bar/g' file.txt"
+assert_passthrough "sed -i 's/foo/bar/g' file は通過" \
+    "sed -i 's/foo/bar/g' file.txt"
+assert_passthrough "RUST_CLI_REWRITE_LIST=sed でも通過" \
+    "sed 's/foo/bar/g' file.txt" \
+    "RUST_CLI_REWRITE_LIST=sed"
 
 # ── 既存 Rust ツールはスキップ ───────────────────────────────────────────────
 echo ""

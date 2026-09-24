@@ -8,14 +8,9 @@
   3. このコメントブロック（HTML コメント）は削除する。
 
   配置に関する注意:
-  - フロントマターの `name` は実在しても問題ない仮の値 `example-coordinator`（kebab-case）にしてある。
-    これは Claude Code が `agents/**` を再帰的に自動検出する際に、`<domain>-coordinator` のような
-    山括弧を含む不正な name で壊れたエージェントとして読み込まれるのを防ぐため。
-  - コピー後は必ず `name` を `<domain>-coordinator`（例: `pr-review-coordinator`）の実値に置き換える。
-  - なお `scripts/validate-plugins.py` は plugin.json の `agents` フィールドが宣言された場合のみ
-    エージェント .md を検証する。本プラグインは `agents` を宣言していないため、このテンプレートが
-    `templates/` に残っていてもバリデーションは PASS する。ただし自動検出の対象にはなり得るので、
-    name は上記のとおり有効な kebab-case にしてある。
+  - Claude Code は `agents/**` を再帰的に自動検出するため、このテンプレートは `agents/` の外に置いている。
+  - フロントマターの `name` は仮の値 `example-coordinator`（kebab-case）にしてある。
+    コピー後は必ず `<domain>-coordinator`（例: `pr-review-coordinator`）の実値に置き換える。
 -->
 ---
 name: example-coordinator

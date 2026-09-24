@@ -114,7 +114,7 @@ description: >
 ### 新しい統括 (Coordinator) SubAgent を作るとき
 - 複数の局面（複数の Skill / SubAgent）を合成する新しいドメインのワークフローを統括させたい場合は、
   L1 統括 SubAgent を新規作成する
-- コピー用テンプレート: `agents/templates/coordinator-template.md`
+- コピー用テンプレート: `templates/coordinator-template.md`
   - フロントマター（`name` / `description` / `tools` / `skills` / `model`）と本文（`Step n:` 目的のみ・
     成功条件・失敗時フォールバック）の雛形をプレースホルダー付きで提供する
   - 使い方: `agents/<domain>-coordinator.md` にコピーし、`<...>` を実値へ置換、先頭のコメントを削除する

@@ -146,6 +146,12 @@
       "source": "./plugins/local-llm-gateway",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "hourensou",
+      "source": "./plugins/hourensou",
+      "version": "0.1.0",
+      "category": "productivity"
     }
   ]
 }

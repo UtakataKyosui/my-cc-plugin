@@ -164,6 +164,12 @@
       "source": "./plugins/herdr-orchestration",
       "version": "0.1.0",
       "category": "workflow"
+    },
+    {
+      "name": "hourensou",
+      "source": "./plugins/hourensou",
+      "version": "0.1.0",
+      "category": "productivity"
     }
   ]
 }

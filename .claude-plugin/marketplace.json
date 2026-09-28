@@ -176,6 +176,12 @@
       "source": "./plugins/worktree-guard",
       "version": "0.1.0",
       "category": "workflow"
+    },
+    {
+      "name": "budoux-html",
+      "source": "./plugins/budoux-html",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "claude-config-audit",
+  "version": "0.1.0",
+  "description": "~/.claude の設定資産（Skills/Rules/SubAgents/Hooks/Commands）を棚卸しする4つの監査Skillをまとめたプラグイン。フロントマターや参照切れの機械検査、モデル別プロンプト指針との突き合わせ、Skill・SubAgent・Hookの起動実績集計、Claude Code engineの挙動観測を提供する。",
+  "author": {"name": "UtakataKyosui"},
+  "keywords": ["claude-code", "audit", "skills", "rules", "hooks", "subagents", "diagnostics"],
+  "license": "MIT",
+  "skills": [
+    "./skills/claude-asset-audit",
+    "./skills/claude-config-doctor",
+    "./skills/claude-usage-audit",
+    "./skills/claude-mod-probe"
+  ]
+}

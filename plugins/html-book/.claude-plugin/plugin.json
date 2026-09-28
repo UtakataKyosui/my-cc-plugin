@@ -1,0 +1,12 @@
+{
+  "name": "html-book",
+  "version": "0.1.0",
+  "description": "レポート形式の HTML を、1 節 1 ページでめくって読む本の形の HTML に変換する。表紙に目次を作り、ボタン・キー操作・スワイプでページを移動できる。外部ライブラリ不要で 1 ファイルに閉じる。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["html", "report", "book", "presentation"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/html-book"]
+}

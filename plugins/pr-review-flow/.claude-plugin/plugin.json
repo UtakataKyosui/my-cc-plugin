@@ -1,0 +1,17 @@
+{
+  "name": "pr-review-flow",
+  "version": "0.1.0",
+  "description": "PR レビュー対応のワークフローをまとめる。gh-wheel による PR/Issue 操作、レビューコメントへの end-to-end 対応、Playwright MCP による UI スクリーンショット撮影の3 Skill と、それらを合成する pr-review-coordinator SubAgent を提供する。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["pr-review", "github", "gh-wheel", "playwright", "workflow"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": [
+    "./skills/gh-wheel",
+    "./skills/respond-review",
+    "./skills/review-screenshots"
+  ],
+  "agents": ["./agents/pr-review-coordinator.md"]
+}

@@ -1,0 +1,4 @@
+{
+  "description": "使った Skill と SubAgent を記録し、/feedback で Good・Fine・Bad を付ける",
+  "modules": ["./register.ts"]
+}

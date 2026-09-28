@@ -1,0 +1,18 @@
+{
+  "name": "hourensou",
+  "version": "0.1.0",
+  "description": "報告・連絡・相談（報連相）と進捗ドラフト作成をまとめる。期限リスクの検知（junct の sqlite3 DB を読み取り専用で直接参照する）と報連相ドラフト作成、承認/確認/共有の依頼種別判定、定例進捗報告の整形、文書の主張検証を提供する。deadline-hourensou と関連フックは junct（ローカルの並行作業コックピットアプリ）のインストールとタスク見積もり運用を前提とする。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["hourensou", "reporting", "deadline", "junct", "progress-note", "claim-verification"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": [
+    "./skills/deadline-hourensou",
+    "./skills/approval-request-framing",
+    "./skills/standup-progress-note",
+    "./skills/claim-verifier"
+  ],
+  "agents": ["./agents/claim-verifier.md"]
+}

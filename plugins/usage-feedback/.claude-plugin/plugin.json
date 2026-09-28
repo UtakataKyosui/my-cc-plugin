@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "usage-feedback",
+  "version": "1.0.0",
+  "description": "使った Skill と SubAgent を記録し、/feedback で Good・Fine・Bad を付ける function hook",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "userConfig": {
+    "keepDays": {
+      "type": "number",
+      "title": "記録を残す日数",
+      "description": "これを過ぎた使用の記録は、評価の有無にかかわらずセッション開始時に消す",
+      "default": 90
+    }
+  }
+}

@@ -1,0 +1,31 @@
+GitHub の {{REPO}} の Issue #{{ISSUE}} を実装し、PR を作成してください。
+
+## 作業場所
+
+- 作業ディレクトリは git worktree `{{WORKTREE}}` です。ブランチ `{{BRANCH}}` を checkout 済みで、`origin/{{BASE}}` から分岐しています
+- このディレクトリの外のファイルを編集しないでください。`git worktree` の追加・削除や、他の worktree への操作もしないでください
+- 最初に `gh issue view {{ISSUE}} --repo {{REPO}}` で Issue を、`gh issue view 2 --repo {{REPO}}` で親 Issue の前提と依存関係を読んでください
+- リポジトリの `AGENTS.md` と `CLAUDE.md` に従ってください。依存のインストールは `pnpm install --frozen-lockfile` です
+
+## 進め方
+
+- Issue に書かれた範囲だけを実装します。範囲外で直したほうがよいと思ったことは、実装せずに結果の `notes` に書いてください
+- 型チェック・lint・format を通してからコミットします。触った範囲に応じて `pnpm run format`、`cargo check` と `cargo clippy`（触った crate に `-p` を付ける）、`pnpm run web-core:check`、`pnpm run local-web:check` などを使ってください。SQLx のクエリや migration を足したら `pnpm run prepare-db`、TS に出す Rust の型を変えたら `pnpm run generate-types` も実行します
+- `pnpm run remote-web:check` は `AppNavigation.ts` の TS2339 で main の時点から失敗しています。これは直さなくてかまいません
+- `CARGO_TARGET_DIR` は他の worktree と共有しています。cargo がロック待ちで止まって見えることがありますが正常です
+- 同じ理由で `target/debug/server` などのバイナリは他の worktree のビルドで上書きされます。`cargo run` や `pnpm run dev` でサーバーを起動しての確認はしないでください。実行時の確認は起動した側がまとめて行います。PR 本文に、確認すべき手順（curl の例など）を書いてください
+- `pkill` や `kill` で自分が起動していないプロセスを止めないでください
+- 1 つの論理的な変更につき 1 コミットにし、Conventional Commits の形式で英語のメッセージを書いてください。メッセージの末尾に `Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>` を付けます
+- 実装を始める前に判断が必要な点があり、Issue と親 Issue とコードから決められない場合だけ、下の「質問のしかた」に従って質問してください
+
+## PR
+
+- `git push -u origin {{BRANCH}}` のあと、`gh pr create --repo {{REPO}} --base {{BASE}} --head {{BRANCH}}` で PR を作ります
+- タイトルは Conventional Commits の形式、本文は日本語で、変更内容・確認したコマンドと結果・未対応事項を書き、`Closes #{{ISSUE}}` を含め、最後の行を `🤖 Generated with [Claude Code](https://claude.com/claude-code)` にします
+- PR の merge、Issue や PR の close、`{{BRANCH}}` 以外のブランチへの push はしないでください
+
+## 結果
+
+最後に次の JSON を `{{DIR}}/result.json` に Write で書き、会話にはそのパスだけを返してください。
+
+{"issue": {{ISSUE}}, "pr_url": "PR の URL（作れなかったら null）", "branch": "{{BRANCH}}", "base": "{{BASE}}", "commits": ["<hash> <subject>"], "checks": [{"cmd": "実行したコマンド", "result": "pass か fail と要点"}], "notes": "範囲外で気づいたこと・判断したこと", "unresolved": "やり残したこと"}

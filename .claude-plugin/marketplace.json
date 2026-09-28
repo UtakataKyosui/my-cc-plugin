@@ -112,6 +112,12 @@
       "category": "workflow"
     },
     {
+      "name": "claude-config-audit",
+      "source": "./plugins/claude-config-audit",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
       "name": "gh-remote-browse",
       "source": "./plugins/gh-remote-browse",
       "version": "0.1.0",
@@ -144,6 +150,72 @@
     {
       "name": "local-llm-gateway",
       "source": "./plugins/local-llm-gateway",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "usage-feedback",
+      "source": "./plugins/usage-feedback",
+      "version": "1.0.0",
+      "category": "development"
+    },
+    {
+      "name": "mod-event-probe",
+      "source": "./plugins/mod-event-probe",
+      "version": "0.0.1",
+      "category": "development"
+    },
+    {
+      "name": "herdr-orchestration",
+      "source": "./plugins/herdr-orchestration",
+      "version": "0.1.0",
+      "category": "workflow"
+    },
+    {
+      "name": "hourensou",
+      "source": "./plugins/hourensou",
+      "version": "0.1.0",
+      "category": "productivity"
+    },
+    {
+      "name": "pr-review-flow",
+      "source": "./plugins/pr-review-flow",
+      "version": "0.1.0",
+      "category": "workflow"
+    },
+    {
+      "name": "html-book",
+      "source": "./plugins/html-book",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "markdown-new",
+      "source": "./plugins/markdown-new",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "mermaid-render-probe",
+      "source": "./plugins/mermaid-render-probe",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "mac-window-capture",
+      "source": "./plugins/mac-window-capture",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "worktree-guard",
+      "source": "./plugins/worktree-guard",
+      "version": "0.1.0",
+      "category": "workflow"
+    },
+    {
+      "name": "budoux-html",
+      "source": "./plugins/budoux-html",
       "version": "0.1.0",
       "category": "development"
     }

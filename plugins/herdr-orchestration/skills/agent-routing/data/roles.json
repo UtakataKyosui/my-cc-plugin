@@ -1,0 +1,56 @@
+{
+  "implement": {
+    "model": "sonnet",
+    "effort": "high",
+    "policy": "write",
+    "junct_phase": "start_task",
+    "grace_ms": 8000,
+    "kick_wait_ms": 20000,
+    "status": "confirmed"
+  },
+  "review": {
+    "model": "sonnet",
+    "effort": "high",
+    "policy": "readonly",
+    "junct_phase": "start_review_task",
+    "grace_ms": 8000,
+    "kick_wait_ms": 20000,
+    "status": "confirmed"
+  },
+  "refute": {
+    "model": "opus",
+    "effort": "xhigh",
+    "policy": "readonly",
+    "junct_phase": "start_review_task",
+    "grace_ms": 15000,
+    "kick_wait_ms": 40000,
+    "status": "confirmed"
+  },
+  "fix": {
+    "model": "sonnet",
+    "effort": "high",
+    "policy": "write",
+    "junct_phase": "start_fix_task",
+    "grace_ms": 8000,
+    "kick_wait_ms": 20000,
+    "status": "proposed"
+  },
+  "triage": {
+    "model": "haiku",
+    "effort": "low",
+    "policy": "readonly",
+    "junct_phase": "start_other_task",
+    "grace_ms": 8000,
+    "kick_wait_ms": 20000,
+    "status": "proposed"
+  },
+  "design": {
+    "model": "opus",
+    "effort": "high",
+    "policy": "readonly",
+    "junct_phase": "start_other_task",
+    "grace_ms": 15000,
+    "kick_wait_ms": 40000,
+    "status": "proposed"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "markdown-new",
+  "version": "0.1.0",
+  "description": "URL のページを Markdown の全文で取得してファイルに保存する。対象サイトが Markdown を返せば直接取り、返さなければ markdown.new で変換する。WebFetch の要約に抜けがあるときの代替手段。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["markdown", "fetch", "web", "webfetch"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/markdown-new"]
+}

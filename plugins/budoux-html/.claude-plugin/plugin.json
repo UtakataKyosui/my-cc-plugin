@@ -1,0 +1,12 @@
+{
+  "name": "budoux-html",
+  "version": "0.1.0",
+  "description": "HTML ファイルの日本語テキストに BudouX の文節境界で <wbr> を入れ、word-break: keep-all の CSS を注入する。Markdown の段落結合位置での文節割れも検査できる。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["budoux", "japanese", "html", "line-break"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/budoux-html"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "mermaid-render-probe",
+  "version": "0.1.0",
+  "description": "Mermaid の図を実ブラウザでレンダーし、生成された SVG の実寸・テーマ変数の効き・ラベルのはみ出しを実測する。jsdom では描画できない gantt などの検証に使う。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["mermaid", "svg", "rendering", "testing"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/mermaid-render-probe"]
+}

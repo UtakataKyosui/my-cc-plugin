@@ -211,7 +211,6 @@ scenario/reasoning/outcome/confidence/decision_maker）自体は Issue の設計
 - `skills/semantica-trace/tests/test_idempotency.py` — 同一セッション2回 ingest で重複しないことの確認
 - `skills/semantica-trace/tests/test_reproduction.py` — 第3段階の再現テスト（実トランスクリプト1本）
 - `skills/semantica-trace/ingest_session.sh` — SessionEnd フックから呼ぶ薄いラッパー（第4段階、venv 解決込み）
-- `skills/semantica-trace/session-end-hook-proposal.md` — settings.json への追記案とMCP登録の判断（第4段階、settings.json 自体は書き換えていない）
 
 隔離 venv 自体（`~/.cache/semantica-trace/.venv`）とグラフデータ
 （`~/.cache/semantica-trace/data/graph.json`）はリポジトリ外。
@@ -221,7 +220,9 @@ scenario/reasoning/outcome/confidence/decision_maker）自体は Issue の設計
 - semantica MCP サーバーは照会用にのみ登録する想定だった。記録は本ライブラリが
   直接 `ContextGraph` に書き込み、MCP 経由では記録しない。ただし第4段階の調査で
   semantica 同梱の MCP サーバー自体が未検証の依存関係を持ち込むことが分かった
-  ため、登録は保留した。判断の詳細は `session-end-hook-proposal.md` を参照する。
+  ため、登録は保留した。SessionEnd フックの登録はこのプラグインの `hooks/hooks.json`
+  で済ませ、MCP サーバーは照会用の semantica-trace（`skills/semantica-trace/mcp_server.py`）
+  だけを `.mcp.json` から登録している。
 - トランスクリプトの機微情報（トークン・env ダンプ等）はグラフにもそのまま
   複製される（tool_result の内容を outcome に要約として使うため）。第4段階で
   MCP サーバーを localhost 限定にすることに加え、`~/.cache/semantica-trace/data/`

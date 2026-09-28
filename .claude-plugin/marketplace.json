@@ -158,6 +158,12 @@
       "source": "./plugins/mod-event-probe",
       "version": "0.0.1",
       "category": "development"
+    },
+    {
+      "name": "herdr-orchestration",
+      "source": "./plugins/herdr-orchestration",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

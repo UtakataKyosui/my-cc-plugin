@@ -152,6 +152,12 @@
       "source": "./plugins/usage-feedback",
       "version": "1.0.0",
       "category": "development"
+    },
+    {
+      "name": "mod-event-probe",
+      "source": "./plugins/mod-event-probe",
+      "version": "0.0.1",
+      "category": "development"
     }
   ]
 }

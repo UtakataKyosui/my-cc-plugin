@@ -170,6 +170,12 @@
       "source": "./plugins/mac-window-capture",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "worktree-guard",
+      "source": "./plugins/worktree-guard",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

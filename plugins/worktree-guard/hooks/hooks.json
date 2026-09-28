@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/worktree-guard.sh\"",
+            "timeout": 5,
+            "statusMessage": "並行セッション検出中..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash|EnterWorktree",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/setup-worktree-auto.sh\"",
+            "timeout": 300,
+            "statusMessage": "Worktree 自動環境整備中..."
+          }
+        ]
+      }
+    ]
+  }
+}

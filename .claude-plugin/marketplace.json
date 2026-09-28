@@ -112,6 +112,12 @@
       "category": "workflow"
     },
     {
+      "name": "claude-config-audit",
+      "source": "./plugins/claude-config-audit",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
       "name": "gh-remote-browse",
       "source": "./plugins/gh-remote-browse",
       "version": "0.1.0",

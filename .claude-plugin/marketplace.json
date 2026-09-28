@@ -146,6 +146,12 @@
       "source": "./plugins/local-llm-gateway",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "html-book",
+      "source": "./plugins/html-book",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

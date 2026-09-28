@@ -152,6 +152,12 @@
       "source": "./plugins/html-book",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "markdown-new",
+      "source": "./plugins/markdown-new",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

@@ -170,6 +170,12 @@
       "source": "./plugins/hourensou",
       "version": "0.1.0",
       "category": "productivity"
+    },
+    {
+      "name": "pr-review-flow",
+      "source": "./plugins/pr-review-flow",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

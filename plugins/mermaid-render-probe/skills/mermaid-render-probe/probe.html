@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body { margin: 0; background: #15171c; color: #e6eaf0; font-family: sans-serif; }
+      #out { overflow-x: auto; }
+    </style>
+  </head>
+  <body>
+    <div id="out"></div>
+    <script type="module">
+      // Query params: mermaid=<url to mermaid esm>, config=<JSON>, def=<JSON string[]>
+      const q = new URLSearchParams(location.search);
+      const mermaidUrl =
+        q.get("mermaid") ?? "/node_modules/mermaid/dist/mermaid.esm.mjs";
+      const mermaid = (await import(mermaidUrl)).default;
+
+      const config = JSON.parse(q.get("config") ?? "{}");
+      const definition = JSON.parse(q.get("def") ?? "[]").join("\n");
+
+      let renderSeq = 0;
+      /** Re-renders with a different config without reloading the page, so
+       * several configs can be compared in one browser session. Returns the
+       * same shape as `window.__probe`. */
+      window.__render = async (overrideConfig, overrideDefinition) => {
+        mermaid.initialize({
+          startOnLoad: false,
+          ...(overrideConfig ?? config),
+        });
+        const { svg } = await mermaid.render(
+          `probe-${renderSeq++}`,
+          overrideDefinition?.join("\n") ?? definition,
+        );
+        document.getElementById("out").innerHTML = svg;
+        return measure();
+      };
+
+      function measure() {
+      // Report every text node's horizontal extent against the drawing area.
+      // Uses screen rects, not `getBBox()`: gantt puts its axis ticks inside
+      // transformed <g> elements, and getBBox is in the element's own local
+      // coordinate space, so comparing it to the viewBox reports every tick as
+      // overflowing. Screen rects share one frame of reference with the root
+      // <svg>'s own rect, which is what the user actually sees clipped.
+      const root = document.querySelector("#out svg");
+      const rootRect = root.getBoundingClientRect();
+      const texts = [...root.querySelectorAll("text")].map((t) => {
+        const r = t.getBoundingClientRect();
+        return {
+          text: t.textContent,
+          left: Math.round(r.left - rootRect.left),
+          right: Math.round(r.right - rootRect.left),
+        };
+      });
+      window.__probe = {
+        viewBox: root.getAttribute("viewBox"),
+        svgWidth: root.getAttribute("width"),
+        renderedWidth: Math.round(rootRect.width),
+        clippedLeft: texts.filter((t) => t.left < 0),
+        clippedRight: texts.filter((t) => t.right > rootRect.width),
+        worstLeftOverflow: Math.min(0, ...texts.map((t) => t.left)),
+      };
+      return window.__probe;
+      }
+
+      await window.__render();
+      window.__ready = true;
+    </script>
+  </body>
+</html>

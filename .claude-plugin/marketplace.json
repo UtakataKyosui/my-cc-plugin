@@ -158,6 +158,12 @@
       "source": "./plugins/markdown-new",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "mermaid-render-probe",
+      "source": "./plugins/mermaid-render-probe",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

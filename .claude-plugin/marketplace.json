@@ -164,6 +164,12 @@
       "source": "./plugins/mermaid-render-probe",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "mac-window-capture",
+      "source": "./plugins/mac-window-capture",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

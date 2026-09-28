@@ -1,0 +1,14 @@
+{
+  "implement": {
+    "agent_file": "role-implementer.md",
+    "tools": "Read, Write, Edit, Grep, Glob, Bash"
+  },
+  "review": {
+    "agent_file": "role-reviewer.md",
+    "tools": "Read, Grep, Glob, Bash"
+  },
+  "refute": {
+    "agent_file": "role-verifier.md",
+    "tools": "Read, Grep, Glob, Bash"
+  }
+}

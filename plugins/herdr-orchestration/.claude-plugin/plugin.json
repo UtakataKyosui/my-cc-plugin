@@ -1,0 +1,23 @@
+{
+  "name": "herdr-orchestration",
+  "version": "0.1.0",
+  "description": "herdr のペイン上に複数のコーディングエージェントを並列展開し、実装・レビュー・敵対的検証のロール別にモデルと権限を割り当てて統括する。agent-routing がロールとモデル・effort・ツール権限の対応を1箇所に定義し、herdr-fanout がペイン展開のプリミティブを提供する。gh-review-guard・pr-adversarial-review・herdr-issue-impl はこの上に構築された具体のワークフロー。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["herdr", "orchestration", "pr-review", "agent-routing", "parallel"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": [
+    "./skills/agent-routing",
+    "./skills/herdr-fanout",
+    "./skills/gh-review-guard",
+    "./skills/pr-adversarial-review",
+    "./skills/herdr-issue-impl"
+  ],
+  "agents": [
+    "./agents/role-implementer.md",
+    "./agents/role-reviewer.md",
+    "./agents/role-verifier.md"
+  ]
+}

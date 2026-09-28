@@ -1,0 +1,10 @@
+{
+  "readonly": {
+    "allowed": ["Read", "Write", "Grep", "Glob", "Bash(gh:*)", "Bash(cat:*)"],
+    "disallowed": ["Edit", "NotebookEdit", "AskUserQuestion", "Bash(git:*)", "Bash(jj:*)", "Bash(herdr:*)"]
+  },
+  "write": {
+    "allowed": ["Read", "Write", "Edit", "Grep", "Glob", "Bash(gh:*)", "Bash(cat:*)", "Bash(pnpm:*)", "Bash(mise:*)"],
+    "disallowed": ["AskUserQuestion", "Bash(herdr:*)"]
+  }
+}

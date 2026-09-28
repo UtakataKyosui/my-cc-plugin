@@ -146,6 +146,12 @@
       "source": "./plugins/local-llm-gateway",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "herdr-orchestration",
+      "source": "./plugins/herdr-orchestration",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

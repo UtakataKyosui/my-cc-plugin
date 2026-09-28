@@ -73,4 +73,4 @@ fi
 
 echo "=== Worktree 自動環境整備を開始: $WORKTREE_PATH ===" >&2
 cd "$WORKTREE_PATH"
-bash "$HOME/.claude/scripts/setup-worktree.sh" "$MAIN_REPO"
+bash "${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}/scripts/setup-worktree.sh" "$MAIN_REPO"

@@ -146,6 +146,12 @@
       "source": "./plugins/local-llm-gateway",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "usage-feedback",
+      "source": "./plugins/usage-feedback",
+      "version": "1.0.0",
+      "category": "development"
     }
   ]
 }

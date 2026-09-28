@@ -146,6 +146,12 @@
       "source": "./plugins/local-llm-gateway",
       "version": "0.1.0",
       "category": "development"
+    },
+    {
+      "name": "pr-review-flow",
+      "source": "./plugins/pr-review-flow",
+      "version": "0.1.0",
+      "category": "workflow"
     }
   ]
 }

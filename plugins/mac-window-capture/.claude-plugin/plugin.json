@@ -1,0 +1,12 @@
+{
+  "name": "mac-window-capture",
+  "version": "0.1.0",
+  "description": "macOS で特定アプリのウィンドウだけをスクリーンショットに撮る。画面全体や矩形指定と違い、手前に重なった他アプリのウィンドウが写り込まない。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["macos", "screenshot", "screencapture"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/mac-window-capture"]
+}

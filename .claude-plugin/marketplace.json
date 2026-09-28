@@ -182,6 +182,42 @@
       "source": "./plugins/pr-review-flow",
       "version": "0.1.0",
       "category": "workflow"
+    },
+    {
+      "name": "html-book",
+      "source": "./plugins/html-book",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "markdown-new",
+      "source": "./plugins/markdown-new",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "mermaid-render-probe",
+      "source": "./plugins/mermaid-render-probe",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "mac-window-capture",
+      "source": "./plugins/mac-window-capture",
+      "version": "0.1.0",
+      "category": "development"
+    },
+    {
+      "name": "worktree-guard",
+      "source": "./plugins/worktree-guard",
+      "version": "0.1.0",
+      "category": "workflow"
+    },
+    {
+      "name": "budoux-html",
+      "source": "./plugins/budoux-html",
+      "version": "0.1.0",
+      "category": "development"
     }
   ]
 }

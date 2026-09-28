@@ -1,0 +1,12 @@
+{
+  "name": "worktree-guard",
+  "version": "0.1.0",
+  "description": "並行 Claude Code セッションを検出し、Git Worktree / jj workspace で作業を分離してファイル競合を防止する。VCS 種別を自動判定し、SessionStart/PostToolUse フックで検出と自動整備を行う。",
+  "author": {
+    "name": "UtakataKyosui"
+  },
+  "keywords": ["worktree", "jj", "workspace", "parallel-sessions"],
+  "license": "MIT",
+  "repository": "https://github.com/UtakataKyosui/my-cc-plugin",
+  "skills": ["./skills/worktree-guard"]
+}

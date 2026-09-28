@@ -7,7 +7,7 @@
 set -u
 
 DB="$HOME/Library/Application Support/com.taikiamo.junct/junct.sqlite3"
-STATE="${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/hourensou}/.deadline-alert-state"
+STATE="${CLAUDE_PLUGIN_DATA:-$HOME/.claude}/.deadline-alert-state"
 COOLDOWN_SECONDS=3600  # 同じタスクへの注意は 1 時間に 1 回だけ
 THRESHOLD_PERCENT=70   # 見積もり消化率がこの値以上で注意する
 
